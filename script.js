@@ -1,247 +1,374 @@
 /* =========================================================
-   炭火酒場 よいどれ - 営業デモ用 スクリプト
+   焼肉 陣力 - 営業デモサイト スクリプト
    すべてダミーデータ / 条件分岐のみ / 外部通信なし
    ========================================================= */
 
 /* ---------- ダミーデータ ---------- */
 
-const OSUSUME_ITEMS = [
-  { name: "炙りしめ鯖", price: "780円", desc: "脂の乗った鯖を香ばしく炙りました" },
-  { name: "黒豚炭火焼", price: "980円", desc: "鹿児島黒豚を炭火で香ばしく" },
-  { name: "地鶏刺し盛り", price: "1,080円", desc: "新鮮な地鶏を3種盛りで" },
+const CATEGORIES = [
+  { label: "焼肉メニュー", desc: "牛・豚・鶏・ホルモン", icon: "flame", image: "karubi", tab: "karubi" },
+  { label: "盛り合わせ・セット", desc: "セットメニュー", icon: "plates", image: "family-set", tab: "moriawase" },
+  { label: "ランチメニュー", desc: "ご飯・麺", icon: "bowl", image: "bara-don", tab: "lunch" },
+  { label: "一品料理・ご飯・麺", desc: "サイドメニュー", icon: "noodle", image: "ippin", tab: "gohan" },
+  { label: "お子様メニュー", desc: "ご家族みんなで", icon: "kids", image: "kids-menu", tab: "" },
 ];
 
-const JOREN_ITEMS = [
-  { name: "黒豚ガーリックチャーハン", price: "裏メニュー", desc: "常連さんのリクエストから生まれた一品" },
-  { name: "店長の気まぐれ刺身盛り", price: "裏メニュー", desc: "その日の仕入れで店長が選ぶ特別盛り" },
-  { name: "裏ハイボール", price: "裏メニュー", desc: "ちょっと濃いめ、常連さん向けの一杯" },
+const RECOMMEND_ITEMS = [
+  { name: "陣力カルビ", price: "¥1,200", desc: "和牛の旨みを堪能できる、人気No.1カルビ", image: "karubi" },
+  { name: "特選カルビ", price: "¥3,200", desc: "サシの入った贅沢な一枚", image: "tokusen-karubi" },
+  { name: "上タン塩", price: "¥1,600", desc: "まずはこれ。陣力の定番", image: "tongue" },
+  { name: "ハラミ", price: "¥1,200", desc: "柔らかく旨みたっぷりの人気部位", image: "harami" },
+  { name: "黒豚バラ焼", price: "¥830", desc: "鹿屋の黒豚を炭火で香ばしく", image: "kurobuta" },
+  { name: "ファミリーセット", price: "¥7,000", desc: "家族みんなで楽しめる人気のセット", image: "family-set" },
+  { name: "鹿屋黒豚ばら丼", price: "¥1,300", desc: "ランチで人気の黒豚ばら丼", image: "bara-don" },
 ];
 
-/* 診断結果テーブル: Q1(気分) x Q2(肉/魚) → 料理 */
-const SHINDAN_DISH_TABLE = {
-  "gattsuri|niku": "黒豚炭火焼",
-  "gattsuri|sakana": "炙りしめ鯖",
-  "gattsuri|dotchi": "唐揚げ",
-  "karume|niku": "地鶏刺し盛り",
-  "karume|sakana": "刺身",
-  "karume|dotchi": "炙りしめ鯖",
-  "osake|niku": "黒豚ガーリックチャーハン",
-  "osake|sakana": "店長の気まぐれ刺身盛り",
-  "osake|dotchi": "地鶏刺し盛り",
-};
+const MENU_TABS = [
+  { id: "karubi", label: "カルビ", items: [
+    { name: "陣力カルビ", price: "¥1,200" },
+    { name: "特選カルビ", price: "¥3,200" },
+    { name: "上カルビ", price: "¥1,800" },
+  ]},
+  { id: "rosu", label: "ロース", items: [
+    { name: "上ロース", price: "¥1,800" },
+    { name: "ロース", price: "¥1,200" },
+  ]},
+  { id: "tan", label: "タン", items: [
+    { name: "上タン塩", price: "¥1,600" },
+    { name: "タン先", price: "¥980" },
+  ]},
+  { id: "harami", label: "ハラミ", items: [
+    { name: "ハラミ", price: "¥1,200" },
+    { name: "特選ハラミ", price: "¥1,800" },
+  ]},
+  { id: "horumon", label: "ホルモン", items: [
+    { name: "陣力ホルモン", price: "¥780" },
+    { name: "ミノ", price: "¥680" },
+  ]},
+  { id: "buta", label: "豚肉", items: [
+    { name: "黒豚バラ焼", price: "¥830" },
+    { name: "黒豚トロロース", price: "¥980" },
+  ]},
+  { id: "tori", label: "鶏", items: [
+    { name: "若鶏もも", price: "¥780" },
+    { name: "手羽先", price: "¥580" },
+  ]},
+  { id: "kaisen", label: "海鮮", items: [
+    { name: "イカ", price: "¥780" },
+    { name: "エビ", price: "¥880" },
+  ]},
+  { id: "yasai", label: "野菜", items: [
+    { name: "野菜盛り合わせ", price: "¥580" },
+    { name: "焼きねぎ", price: "¥380" },
+  ]},
+  { id: "salad", label: "サラダ", items: [
+    { name: "陣力サラダ", price: "¥580" },
+    { name: "トマトサラダ", price: "¥480" },
+  ]},
+  { id: "kimuchi", label: "キムチ・ナムル", items: [
+    { name: "キムチ盛り合わせ", price: "¥480" },
+    { name: "ナムル", price: "¥380" },
+  ]},
+  { id: "gohan", label: "ご飯・麺", items: [
+    { name: "鹿屋黒豚ばら丼", price: "¥1,300" },
+    { name: "クッパ", price: "¥680" },
+    { name: "冷麺", price: "¥780" },
+  ]},
+  { id: "moriawase", label: "盛り合わせ", items: [
+    { name: "カルビ&タン盛り合わせ", price: "¥2,400" },
+    { name: "4種盛り", price: "¥3,000" },
+  ]},
+  { id: "set", label: "セット", items: [
+    { name: "ファミリーセット", price: "¥7,000" },
+    { name: "陣力コース", price: "¥4,500" },
+  ]},
+  { id: "lunch", label: "ランチ", items: [
+    { name: "黒豚ばら丼ランチ", price: "¥1,300" },
+    { name: "カルビランチ", price: "¥1,200" },
+    { name: "ロースランチ", price: "¥1,300" },
+  ]},
+];
 
-/* 診断結果テーブル: Q3(飲みたいもの) → お酒 */
-const SHINDAN_DRINK_TABLE = {
-  beer: "生ビール",
-  shochu: "芋焼酎「お湯割り」",
-  sake: "日本酒「純米吟醸」",
-};
+const ITEM_PRICES = {};
+MENU_TABS.forEach((tab) => tab.items.forEach((item) => (ITEM_PRICES[item.name] = item.price)));
+RECOMMEND_ITEMS.forEach((item) => (ITEM_PRICES[item.name] = item.price));
+ITEM_PRICES["お子様メニュー"] = "¥600〜";
+ITEM_PRICES["4種盛り"] = "¥3,000";
 
-/* Q3が「まだ決めてない」場合、料理のジャンルからお酒を提案 */
-const DISH_GENRE = {
-  "黒豚炭火焼": "niku",
-  "炙りしめ鯖": "sakana",
-  "唐揚げ": "niku",
-  "地鶏刺し盛り": "niku",
-  "刺身": "sakana",
-  "黒豚ガーリックチャーハン": "niku",
-  "店長の気まぐれ刺身盛り": "sakana",
-};
+/* ---------- 診断の質問 ---------- */
 
-const DRINK_COMMENTS = {
-  beer: "キンキンに冷えた一杯とジューシーな一皿、最高の組み合わせです",
-  shochu: "この組み合わせ、実は常連さん人気No.1",
-  sake: "料理の旨みを引き立てる、通も唸る組み合わせです",
-  omakase: "迷ったときはコレ。間違いのない鉄板コースです",
-};
-
-/* 診断の質問データ */
-const SHINDAN_QUESTIONS = [
+const DIAG_QUESTIONS = [
   {
-    key: "q1",
-    text: "今日はどんな気分？",
+    key: "people",
+    text: "人数は？",
     options: [
-      { label: "ガッツリ食べたい", value: "gattsuri" },
-      { label: "軽めにいきたい", value: "karume" },
-      { label: "お酒メイン", value: "osake" },
+      { label: "1人", value: "1" },
+      { label: "2人", value: "2" },
+      { label: "3〜4人", value: "mid" },
+      { label: "5人以上", value: "big" },
     ],
   },
   {
-    key: "q2",
-    text: "どれが好き？",
+    key: "mood",
+    text: "今日の気分は？",
     options: [
-      { label: "肉", value: "niku" },
-      { label: "魚", value: "sakana" },
-      { label: "どっちでも", value: "dotchi" },
+      { label: "とにかく肉を食べたい", value: "meat" },
+      { label: "家族で楽しみたい", value: "family" },
+      { label: "少し贅沢したい", value: "luxury" },
+      { label: "いろいろ食べたい", value: "variety" },
     ],
   },
   {
-    key: "q3",
-    text: "今日飲みたいのは？",
+    key: "budget",
+    text: "予算は？",
     options: [
-      { label: "ビール", value: "beer" },
-      { label: "焼酎", value: "shochu" },
-      { label: "日本酒", value: "sake" },
-      { label: "まだ決めてない", value: "mada" },
+      { label: "〜3,000円", value: "low" },
+      { label: "3,000〜5,000円", value: "mid" },
+      { label: "5,000〜8,000円", value: "high" },
+      { label: "8,000円以上", value: "premium" },
     ],
   },
 ];
 
-/* ペアリング: 料理 → お酒 */
-const PAIRING_TABLE = {
-  "炙りしめ鯖": { drink: "日本酒「純米吟醸」", note: "上品な旨みと鯖の脂が寄り添う王道の組み合わせ" },
-  "黒豚炭火焼": { drink: "芋焼酎「お湯割り」", note: "香ばしい炭火の風味を焼酎の旨みが包み込みます" },
-  "唐揚げ": { drink: "生ビール", note: "揚げたてのジューシーさに、キレのある一杯を" },
-  "刺身": { drink: "日本酒", note: "素材の味を邪魔しない、すっきりとした飲み口が好相性" },
-};
+const peopleLabel = (people) => ({ "1": "1人", "2": "2人", mid: "3〜4人", big: "5人以上" }[people]);
 
-/* ---------- 画面切り替え ---------- */
+/* 人数・気分・予算から「おすすめの組み合わせ」を条件分岐で組み立てる */
+function buildRecommendation({ people, mood, budget }) {
+  if (people === "1") {
+    const items = ["鹿屋黒豚ばら丼"];
+    let comment = "ランチにもひとり飲みにもぴったりな一杯。がっつり派なら上タン塩をプラスしても◎";
+    if (mood === "luxury" || budget === "high" || budget === "premium") {
+      items.push("上タン塩");
+      comment = "一人でも、ちょっと贅沢に。黒豚ばら丼と上タン塩の組み合わせが人気です";
+    }
+    return { title: "1人ランチ・ひとり飲みなら", items, comment };
+  }
 
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach((el) => {
-    el.classList.toggle("active", el.id === id);
-  });
-  window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  const label = peopleLabel(people);
+  let title = "";
+  let items = [];
+  let comment = "";
+
+  if (mood === "family" || people === "big") {
+    title = people === "big" ? `${label}のご家族・グループなら` : `${label}で家族利用なら`;
+    items = ["ファミリーセット", "上タン塩", "お子様メニュー"];
+    comment =
+      people === "big"
+        ? "大人数でも取り分けやすい構成。お子様連れのご家族にも人気です"
+        : "家族みんなで楽しめる、陣力の人気No.1コースです";
+  } else if (mood === "luxury") {
+    title = `${label}で少し贅沢したいなら`;
+    items = people === "2" ? ["特選カルビ", "上タン塩", "ハラミ"] : ["特選カルビ", "上タン塩", "ハラミ", "陣力カルビ"];
+    comment = "サシの入った特選カルビを中心に、ちょっと贅沢な組み合わせです";
+  } else if (mood === "meat") {
+    title = `${label}でガッツリ肉を楽しむなら`;
+    items = people === "mid" ? ["陣力カルビ", "ハラミ", "黒豚バラ焼", "カルビ&タン盛り合わせ"] : ["陣力カルビ", "ハラミ", "黒豚バラ焼"];
+    comment = "とにかく肉!という日はこの組み合わせで間違いなしです";
+  } else {
+    title = `${label}でいろいろ楽しむなら`;
+    items = ["陣力カルビ", "上タン塩", "4種盛り"];
+    comment = "色々な部位を少しずつ。初めての方にもおすすめの組み合わせです";
+  }
+
+  if (budget === "low") {
+    items = items.filter((i) => i !== "特選カルビ" && i !== "ファミリーセット");
+    if (items.length === 0) items = ["陣力カルビ", "上タン塩"];
+    comment += "（予算に合わせて品数を調整しています）";
+  }
+
+  return { title, items, comment };
 }
 
-document.querySelectorAll("[data-target]").forEach((el) => {
-  el.addEventListener("click", () => {
-    const target = el.getAttribute("data-target");
-    showScreen(target);
-    if (target === "screen-shindan") resetShindan();
-  });
+/* ---------- アイコン ---------- */
+
+function iconSvg(name) {
+  return `<svg class="icon" aria-hidden="true"><use href="#icon-${name}"></use></svg>`;
+}
+
+/* ---------- 写真プレースホルダー生成 ---------- */
+
+function photoHtml(slug, caption, extraClass) {
+  return `
+    <div class="photo ${extraClass || ""}" data-caption="${caption}">
+      <img src="assets/images/${slug}.jpg" alt="${caption}" loading="lazy" onerror="this.remove()">
+    </div>`;
+}
+
+/* ---------- ヘッダー: モバイルナビ ---------- */
+
+const navToggle = document.getElementById("nav-toggle");
+const navMobile = document.getElementById("nav-mobile");
+
+navToggle.addEventListener("click", () => {
+  navMobile.classList.toggle("open");
 });
 
-/* ---------- 1. 今日のおすすめ ---------- */
+navMobile.querySelectorAll("a").forEach((a) =>
+  a.addEventListener("click", () => navMobile.classList.remove("open"))
+);
 
-function renderDishCards(container, items) {
-  container.innerHTML = items
-    .map(
-      (item) => `
-        <div class="dish-card">
-          <div class="dish-name-row">
-            <span class="dish-name">${item.name}</span>
-            <span class="dish-price">${item.price}</span>
-          </div>
-          <p class="dish-desc">${item.desc}</p>
-        </div>`
-    )
-    .join("");
-}
+/* ---------- カテゴリカード ---------- */
 
-renderDishCards(document.getElementById("osusume-list"), OSUSUME_ITEMS);
-renderDishCards(document.getElementById("joren-list"), JOREN_ITEMS);
+function renderCategories() {
+  const el = document.getElementById("category-grid");
+  el.innerHTML = CATEGORIES.map(
+    (c, i) => `
+    <button class="category-card" data-tab="${c.tab || ""}" data-index="${i}">
+      ${photoHtml(c.image, c.label)}
+      <span class="category-body">
+        <span class="category-icon">${iconSvg(c.icon)}</span>
+        <span>
+          <span class="category-label">${c.label}</span>
+          <div class="category-desc">${c.desc}</div>
+        </span>
+      </span>
+    </button>`
+  ).join("");
 
-/* ---------- 2. あなたに合う一品診断 ---------- */
-
-let shindanState = {};
-let shindanStep = 0;
-
-function resetShindan() {
-  shindanState = {};
-  shindanStep = 0;
-  document.getElementById("shindan-result").hidden = true;
-  document.getElementById("shindan-question").hidden = false;
-  document.getElementById("shindan-progress").hidden = false;
-  renderShindanQuestion();
-}
-
-function renderShindanQuestion() {
-  const q = SHINDAN_QUESTIONS[shindanStep];
-  const container = document.getElementById("shindan-question");
-
-  container.innerHTML = `
-    <p class="q-text">${q.text}</p>
-    <div class="q-options">
-      ${q.options
-        .map((opt) => `<button class="option-btn" data-value="${opt.value}">${opt.label}</button>`)
-        .join("")}
-    </div>
-  `;
-
-  container.querySelectorAll(".option-btn").forEach((btn) => {
+  el.querySelectorAll(".category-card").forEach((btn) => {
     btn.addEventListener("click", () => {
-      shindanState[q.key] = btn.getAttribute("data-value");
-      shindanStep++;
-      updateShindanProgress();
-      if (shindanStep < SHINDAN_QUESTIONS.length) {
-        renderShindanQuestion();
+      const tab = btn.getAttribute("data-tab");
+      if (tab) {
+        document.getElementById("menu").scrollIntoView({ behavior: "smooth" });
+        activateTab(tab);
       } else {
-        renderShindanResult();
+        document.getElementById("family-appeal").scrollIntoView({ behavior: "smooth" });
       }
     });
   });
 }
 
-function updateShindanProgress() {
-  const dots = document.querySelectorAll("#shindan-progress .dot");
-  dots.forEach((dot, i) => dot.classList.toggle("active", i < shindanStep + 1 || i === shindanStep));
-  dots.forEach((dot, i) => dot.classList.toggle("active", i <= shindanStep));
+/* ---------- おすすめカード ---------- */
+
+function renderRecommend() {
+  const el = document.getElementById("recommend-grid");
+  el.innerHTML = RECOMMEND_ITEMS.map(
+    (item) => `
+    <div class="dish-card">
+      ${photoHtml(item.image, item.name, "photo--card")}
+      <div class="dish-body">
+        <div class="dish-name-row">
+          <span class="dish-name">${item.name}</span>
+          <span class="dish-price">${item.price}</span>
+        </div>
+        <p class="dish-desc">${item.desc}</p>
+      </div>
+    </div>`
+  ).join("");
 }
 
-function renderShindanResult() {
-  const dishKey = `${shindanState.q1}|${shindanState.q2}`;
-  const dish = SHINDAN_DISH_TABLE[dishKey] || "黒豚炭火焼";
+/* ---------- メニュー詳細タブ ---------- */
 
-  let drinkKey = shindanState.q3;
-  let drink;
-  let commentKey;
+function renderMenuTabs() {
+  const tabBar = document.getElementById("tab-bar");
+  const panels = document.getElementById("tab-panels");
 
-  if (drinkKey === "mada") {
-    const genre = DISH_GENRE[dish] || "niku";
-    drink = genre === "sakana" ? SHINDAN_DRINK_TABLE.sake : SHINDAN_DRINK_TABLE.shochu;
-    commentKey = "omakase";
-  } else {
-    drink = SHINDAN_DRINK_TABLE[drinkKey];
-    commentKey = drinkKey;
-  }
+  tabBar.innerHTML = MENU_TABS.map(
+    (tab, i) => `<button class="tab-chip${i === 0 ? " active" : ""}" data-tab="${tab.id}">${tab.label}</button>`
+  ).join("");
 
-  document.getElementById("shindan-question").hidden = true;
-  document.getElementById("shindan-progress").hidden = true;
+  panels.innerHTML = MENU_TABS.map(
+    (tab, i) => `
+    <div class="tab-panel${i === 0 ? " active" : ""}" id="panel-${tab.id}">
+      ${tab.items
+        .map(
+          (item) => `
+        <div class="menu-row">
+          <span class="menu-row-name">${item.name}</span>
+          <span class="menu-row-price">${item.price}</span>
+        </div>`
+        )
+        .join("")}
+    </div>`
+  ).join("");
 
-  const resultEl = document.getElementById("shindan-result");
-  resultEl.hidden = false;
-  resultEl.innerHTML = `
-    <p class="result-label">あなたには</p>
-    <p class="result-combo">${dish}<br>×<br>${drink}<br>がおすすめ！</p>
-    <p class="result-stars">スタッフおすすめ度 ★★★★★</p>
-    <p class="result-comment">${DRINK_COMMENTS[commentKey] || DRINK_COMMENTS.omakase}</p>
-    <button class="retry-btn" id="shindan-retry-btn">もう一度診断する</button>
-  `;
-
-  document.getElementById("shindan-retry-btn").addEventListener("click", resetShindan);
+  tabBar.querySelectorAll(".tab-chip").forEach((btn) => {
+    btn.addEventListener("click", () => activateTab(btn.getAttribute("data-tab")));
+  });
 }
 
-/* ---------- 3. お酒とのペアリング ---------- */
+function activateTab(tabId) {
+  document.querySelectorAll(".tab-chip").forEach((b) => b.classList.toggle("active", b.getAttribute("data-tab") === tabId));
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === `panel-${tabId}`));
+  const chip = document.querySelector(`.tab-chip[data-tab="${tabId}"]`);
+  if (chip) chip.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+}
 
-function renderPairingButtons() {
-  const container = document.getElementById("pairing-buttons");
-  container.innerHTML = Object.keys(PAIRING_TABLE)
-    .map((dish) => `<button class="pairing-btn" data-dish="${dish}">${dish}</button>`)
-    .join("");
+/* ---------- 診断ウィジェット ---------- */
 
-  container.querySelectorAll(".pairing-btn").forEach((btn) => {
+let diagState = {};
+let diagStep = 0;
+
+function resetDiagnosis() {
+  diagState = {};
+  diagStep = 0;
+  document.getElementById("diag-result").hidden = true;
+  document.getElementById("diag-question").hidden = false;
+  document.getElementById("diag-progress").hidden = false;
+  renderDiagQuestion();
+}
+
+function renderDiagQuestion() {
+  const q = DIAG_QUESTIONS[diagStep];
+  const el = document.getElementById("diag-question");
+  el.innerHTML = `
+    <p class="q-text">${q.text}</p>
+    <div class="q-options">
+      ${q.options.map((opt) => `<button class="option-btn" data-value="${opt.value}">${opt.label}</button>`).join("")}
+    </div>`;
+
+  el.querySelectorAll(".option-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      container.querySelectorAll(".pairing-btn").forEach((b) => b.classList.remove("selected"));
-      btn.classList.add("selected");
-
-      const dish = btn.getAttribute("data-dish");
-      const pairing = PAIRING_TABLE[dish];
-      const resultEl = document.getElementById("pairing-result");
-      resultEl.hidden = false;
-      resultEl.innerHTML = `
-        <p class="dish-name">${dish}</p>
-        <p class="pairing-arrow">とよく合うのは</p>
-        <p class="pairing-drink">${pairing.drink}</p>
-        <p class="pairing-note">${pairing.note}</p>
-      `;
+      diagState[q.key] = btn.getAttribute("data-value");
+      diagStep++;
+      updateDiagProgress();
+      if (diagStep < DIAG_QUESTIONS.length) {
+        renderDiagQuestion();
+      } else {
+        renderDiagResult();
+      }
     });
   });
 }
 
-renderPairingButtons();
+function updateDiagProgress() {
+  document.querySelectorAll("#diag-progress .dot").forEach((dot, i) => dot.classList.toggle("active", i <= diagStep));
+}
 
-/* ---------- 5. クーポン ---------- */
+function renderDiagResult() {
+  const { title, items, comment } = buildRecommendation(diagState);
+
+  document.getElementById("diag-question").hidden = true;
+  document.getElementById("diag-progress").hidden = true;
+
+  const el = document.getElementById("diag-result");
+  el.hidden = false;
+  el.innerHTML = `
+    <p class="diag-result-label">診断結果</p>
+    <p class="diag-result-title">${title}</p>
+    <div class="diag-items">
+      ${items
+        .map(
+          (name) => `
+        <div class="diag-item">
+          ${iconSvg("check")}
+          <span class="diag-item-name">${name}</span>
+          <span class="diag-item-price">${ITEM_PRICES[name] || ""}</span>
+        </div>`
+        )
+        .join("")}
+    </div>
+    <p class="diag-comment">${comment}</p>
+    <button class="retry-btn" id="diag-retry-btn">もう一度診断する</button>`;
+
+  document.getElementById("diag-retry-btn").addEventListener("click", resetDiagnosis);
+}
+
+document.getElementById("diag-start-btn").addEventListener("click", () => {
+  document.getElementById("diagnosis-widget").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+/* ---------- クーポン ---------- */
 
 const COUPON_MESSAGE = "この画面をスタッフに見せると\n本日のおすすめ一品 100円OFF";
 
@@ -252,34 +379,21 @@ document.getElementById("coupon-get-btn").addEventListener("click", () => {
   document.getElementById("coupon-done").hidden = false;
 });
 
-/* ---------- 6. ご意見・口コミ ---------- */
+/* ---------- 口コミ（評価による誘導の出し分けはしない） ---------- */
 
-const GOOGLE_REVIEW_URL = "https://example.com/dummy-google-review";
-
-document.querySelectorAll("#star-select .star").forEach((star) => {
+document.querySelectorAll("#star-select .star-btn").forEach((star) => {
   star.addEventListener("click", () => {
     const value = Number(star.getAttribute("data-value"));
-    document.querySelectorAll("#star-select .star").forEach((s) => {
+    document.querySelectorAll("#star-select .star-btn").forEach((s) => {
       s.classList.toggle("filled", Number(s.getAttribute("data-value")) <= value);
     });
-    renderReviewResult(value);
+    document.getElementById("review-result").hidden = false;
   });
 });
 
-function renderReviewResult(value) {
-  const resultEl = document.getElementById("review-result");
-  resultEl.hidden = false;
+/* ---------- 初期描画 ---------- */
 
-  if (value >= 4) {
-    resultEl.innerHTML = `
-      <p class="review-message">ありがとうございます！<br>よければ口コミでも応援していただけると嬉しいです。</p>
-      <a class="review-link-btn" href="${GOOGLE_REVIEW_URL}" target="_blank" rel="noopener">Google口コミを書く</a>
-      <p class="review-sales-note">※ 満足度の高い人だけ口コミへ誘導するような設計もできます</p>
-    `;
-  } else {
-    resultEl.innerHTML = `
-      <p class="review-message">ご意見ありがとうございます。<br>より良いお店づくりに活かします。</p>
-      <p class="review-sales-note">※ 満足度の高い人だけ口コミへ誘導するような設計もできます</p>
-    `;
-  }
-}
+renderCategories();
+renderRecommend();
+renderMenuTabs();
+resetDiagnosis();
