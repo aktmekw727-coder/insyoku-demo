@@ -2,155 +2,341 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>炭火酒場 よいどれ</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>焼肉 陣力 | 鹿児島県鹿屋市</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<!-- アイコン定義 (共通SVGスプライト) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-flame" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M12 2c-1.5 3-5 5-5 10a5 5 0 0 0 10 0c0-1.8-.6-3-1.5-4 .2 1.6-.7 2.5-1.7 2.5-1.2 0-2-1-1.6-2.4C12.7 6 12.6 4 12 2z"/>
+      <path d="M8.5 15a3.5 3.5 0 0 0 7 0"/>
+    </symbol>
+    <symbol id="icon-plates" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <ellipse cx="12" cy="8.5" rx="6.5" ry="2.2"/>
+      <ellipse cx="12" cy="15.5" rx="8" ry="2.6"/>
+    </symbol>
+    <symbol id="icon-bowl" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 11h16a8 8 0 0 1-16 0z"/>
+      <path d="M9.2 3.2c0 .9.9 1.1.9 2s-.9 1.1-.9 2"/>
+      <path d="M13 2.7c0 .9.9 1.1.9 2s-.9 1.1-.9 2"/>
+    </symbol>
+    <symbol id="icon-noodle" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 11h16a8 8 0 0 1-16 0z"/>
+      <path d="M7.5 9c1 1 2-1 3 0s2-1 3 0 2-1 3 0"/>
+    </symbol>
+    <symbol id="icon-kids" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M12 3l2.6 5.4 5.9.6-4.4 4 .1 6-5.2-3.1-5.2 3.1.1-6-4.4-4 5.9-.6z"/>
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/>
+      <circle cx="12" cy="9" r="2.4"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <circle cx="12" cy="12" r="8.5"/>
+      <path d="M12 7.5V12l3.2 2"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2C10.5 20 4 13.5 4 5a2 2 0 0 1 2-2z"/>
+    </symbol>
+    <symbol id="icon-ticket" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 9a2 2 0 0 0 0-4h16a2 2 0 0 0 0 4 2 2 0 0 1 0 6 2 2 0 0 0 0 4H4a2 2 0 0 0 0-4 2 2 0 0 1 0-6z"/>
+      <path d="M14 5.5v13" stroke-dasharray="2.2 2.2"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 12.5l5 5L20 6.5"/>
+    </symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <circle cx="8.5" cy="8" r="3"/>
+      <circle cx="16" cy="9.5" r="2.4"/>
+      <path d="M3 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+      <path d="M14.5 20c0-2.2 1.6-4 4-4.3"/>
+    </symbol>
+    <symbol id="icon-seat" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"/>
+      <path d="M4 11h16v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/>
+      <path d="M6 16v3M18 16v3"/>
+    </symbol>
+    <symbol id="icon-parking" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <rect x="4" y="3.5" width="16" height="17" rx="2"/>
+      <path d="M9.5 16V7.5h3a2.6 2.6 0 0 1 0 5.2h-3"/>
+    </symbol>
+    <symbol id="icon-line" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 12a8 6.7 0 1 1 3 5.2L4 19l1-3.4A6.6 6.6 0 0 1 4 12z"/>
+    </symbol>
+  </defs>
+</svg>
 
-  <!-- ヘッダー -->
-  <header class="header">
-    <p class="header-eyebrow">DEMO WEB APP</p>
-    <h1 class="shop-name">炭火酒場<br><span>よいどれ</span></h1>
-    <p class="catch">今日の一杯を、ちょっと特別に。</p>
-  </header>
-
-  <!-- ================= ホーム画面 ================= -->
-  <main id="screen-home" class="screen active">
-    <nav class="menu-grid">
-      <button class="menu-card" data-target="screen-osusume">
-        <span class="menu-icon">🍢</span>
-        <span class="menu-label">今日のおすすめ</span>
-      </button>
-      <button class="menu-card" data-target="screen-shindan">
-        <span class="menu-icon">🎯</span>
-        <span class="menu-label">あなたに合う<br>一品診断</span>
-      </button>
-      <button class="menu-card" data-target="screen-pairing">
-        <span class="menu-icon">🍶</span>
-        <span class="menu-label">お酒との<br>ペアリング</span>
-      </button>
-      <button class="menu-card" data-target="screen-joren">
-        <span class="menu-icon">👑</span>
-        <span class="menu-label">常連さん限定</span>
-      </button>
-      <button class="menu-card" data-target="screen-coupon">
-        <span class="menu-icon">🎟️</span>
-        <span class="menu-label">クーポン</span>
-      </button>
-      <button class="menu-card" data-target="screen-review">
-        <span class="menu-icon">⭐</span>
-        <span class="menu-label">ご意見・口コミ</span>
-      </button>
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="container">
+    <a href="#home" class="brand">
+      <span class="brand-sub">KANOYA YAKINIKU</span>
+      <span class="brand-name">焼肉 <span>陣力</span></span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#home">ホーム</a>
+      <a href="#menu">メニュー</a>
+      <a href="#lunch">ランチ</a>
+      <a href="#recommend">おすすめ</a>
+      <a href="#store">店舗情報</a>
     </nav>
+    <a class="header-cta" href="tel:0994000000">
+      <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>
+      ご予約はお電話で
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile">
+    <a href="#home">ホーム</a>
+    <a href="#menu">メニュー</a>
+    <a href="#lunch">ランチ</a>
+    <a href="#recommend">おすすめ</a>
+    <a href="#store">店舗情報</a>
+    <a class="btn btn-primary header-cta" href="tel:0994000000">
+      <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>
+      ご予約はお電話で
+    </a>
+  </nav>
+</header>
 
-    <!-- 営業用カスタマイズ紹介エリア -->
-    <section class="custom-area">
-      <h2 class="custom-title">こんな機能も追加できます</h2>
-      <div class="chip-list">
-        <span class="chip">予約管理</span>
-        <span class="chip">来店スタンプ</span>
-        <span class="chip">顧客管理</span>
-        <span class="chip">自動メッセージ</span>
-        <span class="chip">イベント告知</span>
-        <span class="chip">アンケート</span>
-        <span class="chip">会員限定コンテンツ</span>
+<main>
+
+  <!-- ================= ホーム / ヒーロー ================= -->
+  <section id="home">
+    <div class="hero">
+      <div class="photo" data-caption="炭火で焼き上げる陣力の焼肉">
+        <img src="assets/images/hero-yakiniku.jpg" alt="網の上で焼く陣力の焼肉" onerror="this.remove()">
       </div>
-      <p class="custom-note">店舗ごとの業務・集客方法に合わせてカスタマイズできます</p>
-    </section>
-
-    <footer class="footer">
-      <p class="demo-badge">DEMO</p>
-    </footer>
-  </main>
-
-  <!-- ================= 1. 今日のおすすめ ================= -->
-  <section id="screen-osusume" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">今日のおすすめ</h2>
-    </div>
-    <div class="card-list" id="osusume-list"></div>
-  </section>
-
-  <!-- ================= 2. 一品診断 ================= -->
-  <section id="screen-shindan" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">あなたに合う一品診断</h2>
+      <div class="hero-scrim"></div>
+      <div class="hero-inset photo" data-caption="陣力の木製看板・店舗入口">
+        <img src="assets/images/jinriki-sign.jpg" alt="陣力の木製看板・店舗入口" onerror="this.remove()">
+      </div>
+      <div class="hero-content">
+        <span class="hero-badge">鹿児島県鹿屋市</span>
+        <h1 class="hero-title">鹿屋で、家族と。仲間と。<br>今日も<em>おいしい焼肉</em>を。</h1>
+        <p class="hero-sub">うまい肉で、いい時間を。</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn btn-primary">メニューを見る</a>
+          <a href="#recommend" class="btn btn-outline">今日のおすすめ</a>
+        </div>
+      </div>
     </div>
 
-    <div class="progress-dots" id="shindan-progress">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-    </div>
-
-    <div id="shindan-question" class="shindan-question"></div>
-
-    <div id="shindan-result" class="shindan-result" hidden></div>
-  </section>
-
-  <!-- ================= 3. ペアリング ================= -->
-  <section id="screen-pairing" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">お酒とのペアリング</h2>
-    </div>
-    <p class="section-lead">食べたい料理を選んでください</p>
-    <div class="pairing-buttons" id="pairing-buttons"></div>
-    <div class="pairing-result" id="pairing-result" hidden></div>
-  </section>
-
-  <!-- ================= 4. 常連さん限定 ================= -->
-  <section id="screen-joren" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">常連さん限定</h2>
-    </div>
-    <p class="joren-badge">🔒 常連さん限定 裏メニュー</p>
-    <div class="card-list" id="joren-list"></div>
-    <p class="line-note">こうした限定情報をLINE登録者だけに配信することもできます</p>
-  </section>
-
-  <!-- ================= 5. クーポン ================= -->
-  <section id="screen-coupon" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">クーポン</h2>
-    </div>
-    <div class="coupon-card" id="coupon-card">
-      <p class="coupon-icon">🎟️</p>
-      <p class="coupon-text" id="coupon-text"></p>
-      <button class="primary-btn" id="coupon-get-btn">クーポンを使う</button>
-    </div>
-    <div class="coupon-done" id="coupon-done" hidden>
-      <p class="coupon-done-icon">✅</p>
-      <p class="coupon-done-text">クーポンを獲得しました！</p>
-      <p class="coupon-done-sub">この画面をスタッフにご提示ください</p>
+    <div class="container" style="padding-top:26px;">
+      <div class="category-grid" id="category-grid"></div>
     </div>
   </section>
 
-  <!-- ================= 6. 口コミ ================= -->
-  <section id="screen-review" class="screen">
-    <div class="screen-header">
-      <button class="back-btn" data-target="screen-home">← 戻る</button>
-      <h2 class="screen-title">ご意見・口コミ</h2>
+  <!-- ================= メニュー詳細 ================= -->
+  <section id="menu" class="section section-paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">MENU</span>
+        <h2 class="section-title">メニュー</h2>
+        <p class="section-lead">カルビからセットまで、代表メニューをカテゴリごとにご紹介します</p>
+      </div>
+      <div class="tab-bar" id="tab-bar"></div>
+      <div id="tab-panels"></div>
     </div>
-    <p class="section-lead">本日のご満足度を教えてください</p>
-    <div class="star-select" id="star-select">
-      <span class="star" data-value="1">★</span>
-      <span class="star" data-value="2">★</span>
-      <span class="star" data-value="3">★</span>
-      <span class="star" data-value="4">★</span>
-      <span class="star" data-value="5">★</span>
-    </div>
-    <div class="review-result" id="review-result" hidden></div>
   </section>
 
-</div>
+  <!-- ================= ランチ ================= -->
+  <section id="lunch" class="section section-cream">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">LUNCH</span>
+        <h2 class="section-title">ランチメニュー</h2>
+        <p class="section-lead">平日のランチタイムもお得に焼肉を。お子様連れも大歓迎です</p>
+      </div>
+      <div class="info-card-grid">
+        <div class="info-card">
+          <div class="photo photo--wide" data-caption="鹿屋黒豚ばら丼ランチ">
+            <img src="assets/images/bara-don.jpg" alt="鹿屋黒豚ばら丼ランチ" onerror="this.remove()">
+          </div>
+          <div class="info-card-body">
+            <p class="info-card-title">黒豚ばら丼ランチ　¥1,300</p>
+            <p class="info-card-desc">鹿屋の黒豚を炭火で香ばしく。サラダ・スープ付き</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="photo photo--wide" data-caption="カルビランチ">
+            <img src="assets/images/karubi.jpg" alt="カルビランチ" onerror="this.remove()">
+          </div>
+          <div class="info-card-body">
+            <p class="info-card-title">カルビランチ　¥1,200</p>
+            <p class="info-card-desc">ご飯・スープ・サラダ付きでしっかり満足</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="photo photo--wide" data-caption="お子様ランチ">
+            <img src="assets/images/kids-menu.jpg" alt="お子様ランチ" onerror="this.remove()">
+          </div>
+          <div class="info-card-body">
+            <p class="info-card-title">お子様ランチ　¥600〜</p>
+            <p class="info-card-desc">お子様も食べやすいメニューをご用意しています</p>
+          </div>
+        </div>
+      </div>
+      <p class="section-lead" style="text-align:center; margin-top:6px;">
+        ランチ営業 11:00〜14:00（ラストオーダー 13:30）
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= おすすめ ================= -->
+  <section id="recommend" class="section section-paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">RECOMMEND</span>
+        <h2 class="section-title">陣力のおすすめ</h2>
+        <p class="section-lead">スタッフ一押しの人気メニューです（価格は営業デモ用の参考表示です）</p>
+      </div>
+      <div class="dish-grid" id="recommend-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 何を頼めばいい？ 診断 ================= -->
+  <section id="diagnosis" class="section section-cream">
+    <div class="container">
+      <div class="diagnosis-banner">
+        <div>
+          <p class="diagnosis-banner-title">何を頼めばいい？</p>
+          <p class="diagnosis-banner-sub">人数・気分・予算から、陣力のおすすめをご提案します</p>
+        </div>
+        <button class="btn btn-primary" id="diag-start-btn">おすすめ診断をはじめる</button>
+      </div>
+
+      <div class="diagnosis-widget" id="diagnosis-widget">
+        <div class="progress-dots" id="diag-progress">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <div id="diag-question"></div>
+        <div id="diag-result" hidden class="diag-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 店舗情報 ================= -->
+  <section id="store" class="section section-paper">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">STORE</span>
+        <h2 class="section-title">店舗情報</h2>
+        <p class="section-lead">明るく清潔感のある店内で、ご家族・ご仲間とゆっくりどうぞ</p>
+      </div>
+
+      <div class="info-card-grid">
+        <div class="info-card">
+          <div class="photo photo--wide" data-caption="陣力の明るい店内（座敷・カウンター）">
+            <img src="assets/images/interior.jpg" alt="陣力の明るい店内" onerror="this.remove()">
+          </div>
+          <div class="info-card-body">
+            <p class="info-card-title"><svg class="icon" aria-hidden="true"><use href="#icon-seat"></use></svg>店内のご案内</p>
+            <p class="info-card-desc">座敷・カウンター・テーブル席をご用意。ご家族でもゆっくりお過ごしいただけます。</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="coupon-card" id="coupon-card" style="border:none; border-radius:0; background:transparent; padding:20px 16px 4px;">
+            <div class="coupon-icon"><svg class="icon" aria-hidden="true"><use href="#icon-ticket"></use></svg></div>
+            <p class="coupon-text" id="coupon-text"></p>
+            <button class="btn btn-dark btn-block" id="coupon-get-btn">クーポンを使う</button>
+          </div>
+          <div class="coupon-done" id="coupon-done" hidden>
+            <p class="coupon-done-text">クーポンを獲得しました！</p>
+            <p class="coupon-done-sub">この画面をスタッフにご提示ください</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-body">
+            <p class="info-card-title">店舗情報・アクセス</p>
+            <ul class="info-list">
+              <li><svg class="icon" aria-hidden="true"><use href="#icon-pin"></use></svg>鹿児島県鹿屋市（住所はデモ表示用のサンプルです）</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>0994-00-0000（電話番号はデモ表示用のサンプルです）</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#icon-clock"></use></svg>11:00〜14:00 / 17:00〜21:30</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#icon-parking"></use></svg>駐車場完備</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="family-appeal" class="family-strip">
+        <div class="family-point">
+          <svg class="icon" aria-hidden="true"><use href="#icon-seat"></use></svg>
+          <span class="family-point-text">座敷席あり、お子様と一緒でも安心</span>
+        </div>
+        <div class="family-point">
+          <svg class="icon" aria-hidden="true"><use href="#icon-kids"></use></svg>
+          <span class="family-point-text">お子様メニューあり</span>
+        </div>
+        <div class="family-point">
+          <svg class="icon" aria-hidden="true"><use href="#icon-parking"></use></svg>
+          <span class="family-point-text">駐車場完備でご家族での来店もスムーズ</span>
+        </div>
+        <div class="family-point">
+          <svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+          <span class="family-point-text">明るく清潔感のある店内</span>
+        </div>
+      </div>
+
+      <a class="line-bar" href="#" onclick="return false;">
+        <svg class="icon" aria-hidden="true"><use href="#icon-line"></use></svg>
+        LINEで最新情報・限定クーポンを受け取る
+      </a>
+
+      <div class="review-block">
+        <p class="section-title" style="font-size:17px; margin-bottom:4px;">ご意見をお聞かせください</p>
+        <p class="section-lead">本日のご満足度を教えてください</p>
+        <div class="star-select" id="star-select">
+          <button class="star-btn" data-value="1">★</button>
+          <button class="star-btn" data-value="2">★</button>
+          <button class="star-btn" data-value="3">★</button>
+          <button class="star-btn" data-value="4">★</button>
+          <button class="star-btn" data-value="5">★</button>
+        </div>
+        <div class="review-result" id="review-result" hidden>
+          <p class="review-message">
+            貴重なご意見をありがとうございます。いただいたお声は、より良いお店づくりに活かしてまいります。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= フッター ================= -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-brand">焼肉 陣力</p>
+    <p class="footer-address">鹿児島県鹿屋市（このサイトは営業デモです。掲載内容・価格等はサンプルです）</p>
+
+    <p class="custom-title">こんな機能も追加できます</p>
+    <div class="chip-list">
+      <span class="chip">予約管理</span>
+      <span class="chip">来店スタンプ</span>
+      <span class="chip">顧客管理</span>
+      <span class="chip">自動メッセージ</span>
+      <span class="chip">イベント告知</span>
+      <span class="chip">アンケート</span>
+      <span class="chip">会員限定コンテンツ</span>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="demo-badge">DEMO</span>
+      <span class="footer-disclaimer">※このサイトは営業用デモです。掲載内容・価格等はサンプルです。</span>
+    </div>
+  </div>
+</footer>
 
 <script src="script.js"></script>
 </body>
