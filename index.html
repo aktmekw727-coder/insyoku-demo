@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>炭火酒場 よいどれ</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ヘッダー -->
+  <header class="header">
+    <p class="header-eyebrow">DEMO WEB APP</p>
+    <h1 class="shop-name">炭火酒場<br><span>よいどれ</span></h1>
+    <p class="catch">今日の一杯を、ちょっと特別に。</p>
+  </header>
+
+  <!-- ================= ホーム画面 ================= -->
+  <main id="screen-home" class="screen active">
+    <nav class="menu-grid">
+      <button class="menu-card" data-target="screen-osusume">
+        <span class="menu-icon">🍢</span>
+        <span class="menu-label">今日のおすすめ</span>
+      </button>
+      <button class="menu-card" data-target="screen-shindan">
+        <span class="menu-icon">🎯</span>
+        <span class="menu-label">あなたに合う<br>一品診断</span>
+      </button>
+      <button class="menu-card" data-target="screen-pairing">
+        <span class="menu-icon">🍶</span>
+        <span class="menu-label">お酒との<br>ペアリング</span>
+      </button>
+      <button class="menu-card" data-target="screen-joren">
+        <span class="menu-icon">👑</span>
+        <span class="menu-label">常連さん限定</span>
+      </button>
+      <button class="menu-card" data-target="screen-coupon">
+        <span class="menu-icon">🎟️</span>
+        <span class="menu-label">クーポン</span>
+      </button>
+      <button class="menu-card" data-target="screen-review">
+        <span class="menu-icon">⭐</span>
+        <span class="menu-label">ご意見・口コミ</span>
+      </button>
+    </nav>
+
+    <!-- 営業用カスタマイズ紹介エリア -->
+    <section class="custom-area">
+      <h2 class="custom-title">こんな機能も追加できます</h2>
+      <div class="chip-list">
+        <span class="chip">予約管理</span>
+        <span class="chip">来店スタンプ</span>
+        <span class="chip">顧客管理</span>
+        <span class="chip">自動メッセージ</span>
+        <span class="chip">イベント告知</span>
+        <span class="chip">アンケート</span>
+        <span class="chip">会員限定コンテンツ</span>
+      </div>
+      <p class="custom-note">店舗ごとの業務・集客方法に合わせてカスタマイズできます</p>
+    </section>
+
+    <footer class="footer">
+      <p class="demo-badge">DEMO</p>
+    </footer>
+  </main>
+
+  <!-- ================= 1. 今日のおすすめ ================= -->
+  <section id="screen-osusume" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">今日のおすすめ</h2>
+    </div>
+    <div class="card-list" id="osusume-list"></div>
+  </section>
+
+  <!-- ================= 2. 一品診断 ================= -->
+  <section id="screen-shindan" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">あなたに合う一品診断</h2>
+    </div>
+
+    <div class="progress-dots" id="shindan-progress">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+
+    <div id="shindan-question" class="shindan-question"></div>
+
+    <div id="shindan-result" class="shindan-result" hidden></div>
+  </section>
+
+  <!-- ================= 3. ペアリング ================= -->
+  <section id="screen-pairing" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">お酒とのペアリング</h2>
+    </div>
+    <p class="section-lead">食べたい料理を選んでください</p>
+    <div class="pairing-buttons" id="pairing-buttons"></div>
+    <div class="pairing-result" id="pairing-result" hidden></div>
+  </section>
+
+  <!-- ================= 4. 常連さん限定 ================= -->
+  <section id="screen-joren" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">常連さん限定</h2>
+    </div>
+    <p class="joren-badge">🔒 常連さん限定 裏メニュー</p>
+    <div class="card-list" id="joren-list"></div>
+    <p class="line-note">こうした限定情報をLINE登録者だけに配信することもできます</p>
+  </section>
+
+  <!-- ================= 5. クーポン ================= -->
+  <section id="screen-coupon" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">クーポン</h2>
+    </div>
+    <div class="coupon-card" id="coupon-card">
+      <p class="coupon-icon">🎟️</p>
+      <p class="coupon-text" id="coupon-text"></p>
+      <button class="primary-btn" id="coupon-get-btn">クーポンを使う</button>
+    </div>
+    <div class="coupon-done" id="coupon-done" hidden>
+      <p class="coupon-done-icon">✅</p>
+      <p class="coupon-done-text">クーポンを獲得しました！</p>
+      <p class="coupon-done-sub">この画面をスタッフにご提示ください</p>
+    </div>
+  </section>
+
+  <!-- ================= 6. 口コミ ================= -->
+  <section id="screen-review" class="screen">
+    <div class="screen-header">
+      <button class="back-btn" data-target="screen-home">← 戻る</button>
+      <h2 class="screen-title">ご意見・口コミ</h2>
+    </div>
+    <p class="section-lead">本日のご満足度を教えてください</p>
+    <div class="star-select" id="star-select">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+    <div class="review-result" id="review-result" hidden></div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
