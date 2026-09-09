@@ -1,0 +1,535 @@
+/* =========================================================
+   炭火酒場 よいどれ - 営業デモ用 スタイル
+   黒 / 濃い茶 / 生成り / 金 のシックな居酒屋テイスト
+   ========================================================= */
+
+:root {
+  --color-black: #17120f;
+  --color-brown: #2c2019;
+  --color-brown-light: #3c2c21;
+  --color-cream: #f3ead9;
+  --color-cream-dim: #d8c9ac;
+  --color-gold: #c9a24b;
+  --color-gold-soft: #e3c988;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --shadow-soft: 0 8px 20px rgba(0, 0, 0, 0.35);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-black);
+  color: var(--color-cream);
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.7;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, rgba(201, 162, 75, 0.08), transparent 55%),
+    var(--color-black);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------- ヘッダー ---------- */
+.header {
+  text-align: center;
+  padding: 36px 20px 22px;
+  border-bottom: 1px solid rgba(201, 162, 75, 0.25);
+}
+
+.header-eyebrow {
+  margin: 0 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--color-gold-soft);
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.shop-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-cream);
+}
+
+.shop-name span {
+  display: inline-block;
+  font-size: 32px;
+  color: var(--color-gold);
+  margin-top: 4px;
+  letter-spacing: 0.18em;
+}
+
+.catch {
+  margin: 14px 0 0;
+  font-size: 14px;
+  color: var(--color-cream-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- 画面切り替え ---------- */
+.screen {
+  display: none;
+  padding: 22px 18px 40px;
+  animation: fade-in 0.25s ease;
+}
+
+.screen.active {
+  display: block;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid rgba(201, 162, 75, 0.4);
+  color: var(--color-gold-soft);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.screen-title {
+  margin: 0;
+  font-size: 18px;
+  color: var(--color-cream);
+  letter-spacing: 0.05em;
+}
+
+.section-lead {
+  color: var(--color-cream-dim);
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+/* ---------- ホーム: メニューグリッド ---------- */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 22px 18px 8px;
+}
+
+.menu-card {
+  background: linear-gradient(160deg, var(--color-brown-light), var(--color-brown));
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  border-radius: var(--radius-lg);
+  color: var(--color-cream);
+  padding: 22px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: inherit;
+  box-shadow: var(--shadow-soft);
+  min-height: 108px;
+  justify-content: center;
+}
+
+.menu-card:active {
+  transform: scale(0.97);
+}
+
+.menu-icon {
+  font-size: 26px;
+}
+
+.menu-label {
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+}
+
+/* ---------- カスタマイズ紹介エリア ---------- */
+.custom-area {
+  margin: 30px 18px 0;
+  padding: 18px 16px 20px;
+  border: 1px dashed rgba(201, 162, 75, 0.4);
+  border-radius: var(--radius-lg);
+  background: rgba(201, 162, 75, 0.05);
+}
+
+.custom-title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: var(--color-gold-soft);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.chip {
+  font-size: 11px;
+  color: var(--color-cream-dim);
+  border: 1px solid rgba(216, 201, 172, 0.35);
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+.custom-note {
+  margin: 14px 0 0;
+  font-size: 11px;
+  color: var(--color-cream-dim);
+  text-align: center;
+  opacity: 0.8;
+}
+
+/* ---------- フッター ---------- */
+.footer {
+  text-align: center;
+  padding: 22px 0 8px;
+}
+
+.demo-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(216, 201, 172, 0.5);
+  border: 1px solid rgba(216, 201, 172, 0.25);
+  border-radius: 999px;
+  padding: 4px 12px;
+  margin: 0;
+}
+
+/* ---------- カード共通 (おすすめ / 常連限定) ---------- */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dish-card {
+  background: linear-gradient(160deg, var(--color-brown-light), var(--color-brown));
+  border: 1px solid rgba(201, 162, 75, 0.25);
+  border-radius: var(--radius-md);
+  padding: 16px 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.dish-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.dish-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-cream);
+}
+
+.dish-price {
+  font-size: 14px;
+  color: var(--color-gold-soft);
+  white-space: nowrap;
+}
+
+.dish-desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--color-cream-dim);
+}
+
+.joren-badge {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--color-gold);
+  border: 1px solid rgba(201, 162, 75, 0.5);
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-bottom: 16px;
+}
+
+.line-note {
+  margin-top: 20px;
+  font-size: 11px;
+  color: var(--color-cream-dim);
+  opacity: 0.75;
+  text-align: center;
+}
+
+/* ---------- 診断 ---------- */
+.progress-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(216, 201, 172, 0.25);
+}
+
+.dot.active {
+  background: var(--color-gold);
+}
+
+.shindan-question {
+  text-align: center;
+}
+
+.q-text {
+  font-size: 16px;
+  color: var(--color-cream);
+  margin-bottom: 20px;
+}
+
+.q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  background: var(--color-brown-light);
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  color: var(--color-cream);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  font-size: 15px;
+  font-family: inherit;
+  text-align: left;
+}
+
+.option-btn:active {
+  border-color: var(--color-gold);
+  background: var(--color-brown);
+}
+
+.shindan-result {
+  text-align: center;
+  animation: fade-in 0.3s ease;
+}
+
+.result-label {
+  font-size: 12px;
+  color: var(--color-cream-dim);
+  letter-spacing: 0.1em;
+}
+
+.result-combo {
+  font-size: 20px;
+  color: var(--color-gold);
+  margin: 10px 0 18px;
+  line-height: 1.6;
+}
+
+.result-stars {
+  font-size: 20px;
+  color: var(--color-gold);
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+}
+
+.result-comment {
+  font-size: 13px;
+  color: var(--color-cream-dim);
+  margin-bottom: 24px;
+}
+
+.retry-btn {
+  background: transparent;
+  border: 1px solid rgba(201, 162, 75, 0.4);
+  color: var(--color-gold-soft);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+/* ---------- ペアリング ---------- */
+.pairing-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pairing-btn {
+  background: var(--color-brown-light);
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  color: var(--color-cream);
+  border-radius: var(--radius-md);
+  padding: 14px 8px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.pairing-btn.selected {
+  border-color: var(--color-gold);
+  background: var(--color-brown);
+  color: var(--color-gold-soft);
+}
+
+.pairing-result {
+  background: linear-gradient(160deg, var(--color-brown-light), var(--color-brown));
+  border: 1px solid rgba(201, 162, 75, 0.3);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  text-align: center;
+  animation: fade-in 0.3s ease;
+}
+
+.pairing-arrow {
+  color: var(--color-gold-soft);
+  font-size: 13px;
+  margin: 6px 0;
+}
+
+.pairing-drink {
+  font-size: 18px;
+  color: var(--color-gold);
+  margin: 4px 0 8px;
+}
+
+.pairing-note {
+  font-size: 12px;
+  color: var(--color-cream-dim);
+}
+
+/* ---------- クーポン ---------- */
+.coupon-card {
+  text-align: center;
+  border: 1.5px dashed var(--color-gold);
+  border-radius: var(--radius-lg);
+  padding: 30px 18px;
+  background: rgba(201, 162, 75, 0.06);
+}
+
+.coupon-icon {
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.coupon-text {
+  font-size: 16px;
+  color: var(--color-cream);
+  line-height: 1.7;
+  margin: 0 0 22px;
+}
+
+.primary-btn {
+  background: var(--color-gold);
+  color: var(--color-black);
+  border: none;
+  border-radius: 999px;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  width: 100%;
+}
+
+.primary-btn:active {
+  opacity: 0.85;
+}
+
+.coupon-done {
+  text-align: center;
+  padding: 30px 18px;
+  animation: fade-in 0.3s ease;
+}
+
+.coupon-done-icon {
+  font-size: 34px;
+  margin: 0 0 8px;
+}
+
+.coupon-done-text {
+  font-size: 18px;
+  color: var(--color-gold);
+  margin: 0 0 6px;
+}
+
+.coupon-done-sub {
+  font-size: 12px;
+  color: var(--color-cream-dim);
+}
+
+/* ---------- 口コミ ---------- */
+.star-select {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 34px;
+  margin: 10px 0 26px;
+}
+
+.star {
+  color: rgba(216, 201, 172, 0.3);
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.star.filled {
+  color: var(--color-gold);
+  transform: scale(1.08);
+}
+
+.review-result {
+  text-align: center;
+  animation: fade-in 0.3s ease;
+}
+
+.review-message {
+  font-size: 14px;
+  color: var(--color-cream);
+  margin-bottom: 18px;
+  line-height: 1.8;
+}
+
+.review-link-btn {
+  display: inline-block;
+  background: var(--color-gold);
+  color: var(--color-black);
+  border-radius: 999px;
+  padding: 12px 26px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.review-sales-note {
+  font-size: 11px;
+  color: var(--color-cream-dim);
+  opacity: 0.75;
+  margin-top: 14px;
+}
