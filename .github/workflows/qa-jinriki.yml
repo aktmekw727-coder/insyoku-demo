@@ -23,12 +23,14 @@ jobs:
           test -f style.css
           test -f script.js
           for f in hero-yakiniku.jpg jinriki-sign.jpg interior.jpg karubi.jpg tokusen-karubi.jpg tongue.jpg harami.jpg family-set.jpg bara-don.jpg ippin.jpg kids-menu.jpg; do
-            test -s "assets/images/$f"
-            file "assets/images/$f" | grep -q 'JPEG image data'
+            echo "CHECK $f"
+            test -s "assets/images/$f" || { echo "EMPTY/MISSING $f"; exit 1; }
+            file "assets/images/$f"
+            file "assets/images/$f" | grep -q 'JPEG image data' || { echo "NOT JPEG $f"; exit 1; }
           done
-          test ! -e assets/images/kurobuta.jpg
-          test ! -e assets/images/karubi2.jpg
-          ! grep -q 'image: "kurobuta"' script.js
+          test ! -e assets/images/kurobuta.jpg || { echo 'kurobuta.jpg should not exist'; exit 1; }
+          test ! -e assets/images/karubi2.jpg || { echo 'karubi2.jpg should not exist'; exit 1; }
+          if grep -q 'image: "kurobuta"' script.js; then echo 'kurobuta image reference remains'; exit 1; fi
       - name: Install Japanese font
         shell: bash
         run: |
