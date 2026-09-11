@@ -20,16 +20,24 @@ jobs:
           set -euo pipefail
           mkdir -p assets/images
 
-          base64 -d assets/images/_hero.tmp.b64 > assets/images/hero-yakiniku.jpg
-          base64 -d assets/images/_jinriki-sign.tmp.b64 > assets/images/jinriki-sign.jpg
-          base64 -d assets/images/_tokusen-karubi.tmp.b64 > assets/images/tokusen-karubi.jpg
-          base64 -d assets/images/_tongue.tmp.b64 > assets/images/tongue.jpg
-          base64 -d assets/images/_harami.tmp.b64 > assets/images/harami.jpg
-          base64 -d assets/images/_family-set.tmp.b64 > assets/images/family-set.jpg
-          base64 -d assets/images/_bara-don.tmp.b64 > assets/images/bara-don.jpg
-          base64 -d assets/images/_ippin.tmp.b64 > assets/images/ippin.jpg
-          base64 -d assets/images/_kids-menu.tmp.b64 > assets/images/kids-menu.jpg
-          base64 -d assets/images/_interior.tmp.b64 > assets/images/interior.jpg
+          decode_image() {
+            src="$1"
+            dst="$2"
+            base64 --ignore-garbage -d "$src" > "$dst"
+            test -s "$dst"
+            file "$dst" | grep -q 'JPEG image data'
+          }
+
+          decode_image assets/images/_hero.tmp.b64 assets/images/hero-yakiniku.jpg
+          decode_image assets/images/_jinriki-sign.tmp.b64 assets/images/jinriki-sign.jpg
+          decode_image assets/images/_tokusen-karubi.tmp.b64 assets/images/tokusen-karubi.jpg
+          decode_image assets/images/_tongue.tmp.b64 assets/images/tongue.jpg
+          decode_image assets/images/_harami.tmp.b64 assets/images/harami.jpg
+          decode_image assets/images/_family-set.tmp.b64 assets/images/family-set.jpg
+          decode_image assets/images/_bara-don.tmp.b64 assets/images/bara-don.jpg
+          decode_image assets/images/_ippin.tmp.b64 assets/images/ippin.jpg
+          decode_image assets/images/_kids-menu.tmp.b64 assets/images/kids-menu.jpg
+          decode_image assets/images/_interior.tmp.b64 assets/images/interior.jpg
 
           rm -f assets/images/_*.tmp.b64
           rm -f assets/images/karubi2.jpg
@@ -54,6 +62,7 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
+          git diff --cached --stat
           if git diff --cached --quiet; then
             exit 0
           fi
