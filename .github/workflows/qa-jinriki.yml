@@ -1,0 +1,71 @@
+name: QA Jinriki demo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/qa-jinriki.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Static asset checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f index.html
+          test -f style.css
+          test -f script.js
+          for f in hero-yakiniku.jpg jinriki-sign.jpg interior.jpg karubi.jpg tokusen-karubi.jpg tongue.jpg harami.jpg family-set.jpg bara-don.jpg ippin.jpg kids-menu.jpg; do
+            test -s "assets/images/$f"
+          done
+          test ! -e assets/images/kurobuta.jpg
+          test ! -e assets/images/karubi2.jpg
+          ! grep -q 'image: "kurobuta"' script.js
+      - name: Start local site
+        shell: bash
+        run: |
+          python3 -m http.server 8000 >/tmp/jinriki-http.log 2>&1 &
+          echo $! > /tmp/jinriki-http.pid
+          for i in {1..20}; do
+            curl -fsS http://127.0.0.1:8000/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/jinriki-http.log
+          exit 1
+      - name: HTTP checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS http://127.0.0.1:8000/ | grep -q '焼肉'
+          curl -fsS http://127.0.0.1:8000/style.css >/dev/null
+          curl -fsS http://127.0.0.1:8000/script.js >/dev/null
+          for f in hero-yakiniku.jpg jinriki-sign.jpg interior.jpg karubi.jpg tokusen-karubi.jpg tongue.jpg harami.jpg family-set.jpg bara-don.jpg ippin.jpg kids-menu.jpg; do
+            curl -fsS "http://127.0.0.1:8000/assets/images/$f" >/dev/null
+          done
+      - name: Browser screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME="$(command -v google-chrome || command -v chromium-browser || command -v chromium || true)"
+          if [ -z "$CHROME" ]; then
+            echo 'Chrome/Chromium not found'
+            exit 1
+          fi
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=2500 --window-size=1440,1200 --screenshot=desktop.png http://127.0.0.1:8000/
+          "$CHROME" --headless --no-sandbox --disable-gpu --hide-scrollbars --virtual-time-budget=2500 --window-size=390,844 --screenshot=mobile.png http://127.0.0.1:8000/
+          test -s desktop.png
+          test -s mobile.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jinriki-qa-screenshots
+          path: |
+            desktop.png
+            mobile.png
+          if-no-files-found: error
