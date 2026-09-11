@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'assets/images_bundle.zip'
+      - '.github/workflows/finalize-jinriki.yml'
 
 permissions:
   contents: write
@@ -14,25 +14,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install images and clean temporary files
+      - name: Decode images, clean temp files, and fix script
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p assets/images
-          unzip -o assets/images_bundle.zip -d assets/images
-          rm -f assets/images_bundle.zip
+
+          base64 -d assets/images/_hero.tmp.b64 > assets/images/hero-yakiniku.jpg
+          base64 -d assets/images/_jinriki-sign.tmp.b64 > assets/images/jinriki-sign.jpg
+          base64 -d assets/images/_tokusen-karubi.tmp.b64 > assets/images/tokusen-karubi.jpg
+          base64 -d assets/images/_tongue.tmp.b64 > assets/images/tongue.jpg
+          base64 -d assets/images/_harami.tmp.b64 > assets/images/harami.jpg
+          base64 -d assets/images/_family-set.tmp.b64 > assets/images/family-set.jpg
+          base64 -d assets/images/_bara-don.tmp.b64 > assets/images/bara-don.jpg
+          base64 -d assets/images/_ippin.tmp.b64 > assets/images/ippin.jpg
+          base64 -d assets/images/_kids-menu.tmp.b64 > assets/images/kids-menu.jpg
+          base64 -d assets/images/_interior.tmp.b64 > assets/images/interior.jpg
+
+          rm -f assets/images/_*.tmp.b64
           rm -f assets/images/karubi2.jpg
           rm -f assets/images/*.b64.txt assets/images/*.base64
+          rm -f assets/images_bundle.zip
+
           python3 - <<'PY'
           from pathlib import Path
           p = Path('script.js')
           s = p.read_text(encoding='utf-8')
           target = '  { name: "黒豚バラ焼", price: "¥830", desc: "鹿屋の黒豚を炭火で香ばしく", image: "kurobuta" },\n'
-          if target in s:
-              s = s.replace(target, '')
+          s = s.replace(target, '')
           p.write_text(s, encoding='utf-8')
           PY
+
           rm -f .github/workflows/finalize-jinriki.yml
+
       - name: Commit finalized demo
         shell: bash
         run: |
