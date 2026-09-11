@@ -18,7 +18,6 @@ const RECOMMEND_ITEMS = [
   { name: "特選カルビ", price: "¥3,200", desc: "サシの入った贅沢な一枚", image: "tokusen-karubi" },
   { name: "上タン塩", price: "¥1,600", desc: "まずはこれ。陣力の定番", image: "tongue" },
   { name: "ハラミ", price: "¥1,200", desc: "柔らかく旨みたっぷりの人気部位", image: "harami" },
-  { name: "黒豚バラ焼", price: "¥830", desc: "鹿屋の黒豚を炭火で香ばしく", image: "kurobuta" },
   { name: "ファミリーセット", price: "¥7,000", desc: "家族みんなで楽しめる人気のセット", image: "family-set" },
   { name: "鹿屋黒豚ばら丼", price: "¥1,300", desc: "ランチで人気の黒豚ばら丼", image: "bara-don" },
 ];
