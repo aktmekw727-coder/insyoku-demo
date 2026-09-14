@@ -1025,6 +1025,42 @@ a {
   color: rgba(255, 253, 248, 0.55);
 }
 
+/* 予約希望受付 */
+.section-reservation { background:#241d19; color:#fffdf8; }
+.reservation-head .section-title,.reservation-head .section-lead { color:#fffdf8; }
+.reservation-head .section-eyebrow { color:#e6b86a; }
+.reservation-layout { display:grid; gap:18px; }
+.booking-panel,.booking-explain,.admin-demo { background:#fffdf8; color:#302923; border-radius:18px; box-shadow:0 18px 50px rgba(0,0,0,.18); }
+.booking-panel { padding:18px; overflow:hidden; }
+.booking-panel-top { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:15px; }
+.booking-kicker { margin:0 0 5px; font-size:12px; font-weight:800; letter-spacing:.12em; color:#9b672f; }
+.booking-note,.booking-help { margin:0; color:#74695f; font-size:12px; line-height:1.7; }
+.request-badge { white-space:nowrap; border-radius:999px; background:#f4e4c9; color:#74451f; padding:6px 10px; font-size:11px; font-weight:800; }
+.booking-calendar { display:grid; grid-template-columns:repeat(5,minmax(92px,1fr)); gap:8px; overflow-x:auto; padding-bottom:8px; }
+.booking-day { min-width:92px; display:grid; gap:7px; }
+.booking-date { text-align:center; padding:7px; border-bottom:1px solid #ddd2c7; }
+.booking-date strong { display:block; font-size:14px; }.booking-date span{font-size:11px;color:#8a7e73}
+.slot-btn { border:1px solid #dfd4c9; background:#fff; border-radius:10px; padding:8px 5px; color:#382e27; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.slot-btn b { color:#b07131; font-size:16px; }.slot-btn:hover{border-color:#b07131;background:#fff8ed}.slot-btn.disabled{opacity:.38;cursor:not-allowed}
+.booking-help { margin-top:8px; }
+.booking-explain { padding:22px; }
+.booking-explain-title { margin:0 0 16px; font-size:18px; font-weight:800; }
+.booking-steps { list-style:none; margin:0; padding:0; display:grid; gap:14px; }
+.booking-steps li { display:flex; gap:12px; align-items:center; }
+.booking-steps li>span { flex:0 0 30px; height:30px; border-radius:50%; background:#9b672f; color:#fff; display:grid; place-items:center; font-weight:800; }
+.booking-steps strong,.booking-steps small { display:block; }.booking-steps small{color:#74695f;margin-top:2px}
+.phone-link { margin-top:20px; display:flex; justify-content:center; gap:8px; align-items:center; border:1px solid #cabbaa; border-radius:12px; padding:12px; color:#493a30; font-weight:800; text-decoration:none; }
+.admin-demo { margin-top:22px; padding:22px; display:grid; gap:18px; }
+.admin-demo h3 { margin:5px 0 8px; font-size:20px; }.admin-demo p{margin:0;color:#74695f;line-height:1.7}
+.admin-board { border:1px solid #e1d7cc; border-radius:12px; overflow:hidden; }
+.admin-row { display:grid; grid-template-columns:1.35fr 1fr .9fr; align-items:center; gap:8px; padding:10px 12px; border-top:1px solid #eee5dc; font-size:12px; }
+.admin-row-head { border-top:0;background:#f4ede5;color:#77695e;font-weight:800; }
+.status { border-radius:999px;padding:4px 8px;text-align:center;font-weight:800 }.status-wait{background:#fff0c9;color:#8c5d00}.status-ok{background:#dff3e4;color:#26723a}
+.booking-modal[hidden]{display:none}.booking-modal{position:fixed;inset:0;z-index:1000;background:rgba(24,18,14,.72);display:grid;place-items:center;padding:18px}.modal-open{overflow:hidden}
+.booking-modal-card{position:relative;width:min(100%,460px);max-height:92vh;overflow:auto;background:#fffdf8;border-radius:20px;padding:24px;color:#302923;box-shadow:0 24px 80px rgba(0,0,0,.34)}
+.booking-close{position:absolute;right:14px;top:12px;border:0;background:transparent;font-size:28px;color:#75685e;cursor:pointer}.booking-modal-card h2{margin:0 0 8px}.selected-slot{background:#f4e4c9;border-radius:10px;padding:10px 12px;font-weight:800}
+#booking-form{display:grid;gap:12px}#booking-form label{display:grid;gap:5px;font-size:13px;font-weight:800}#booking-form input,#booking-form select,#booking-form textarea{width:100%;box-sizing:border-box;border:1px solid #d8ccc0;border-radius:10px;padding:11px;font:inherit;background:#fff}.form-caution{margin:0;color:#a05b22;font-size:12px;line-height:1.6}.booking-sent{text-align:center;padding:18px 0 0}.sent-check{width:58px;height:58px;margin:0 auto 12px;border-radius:50%;background:#dff3e4;color:#26723a;display:grid;place-items:center;font-size:28px;font-weight:900}.booking-sent h3{margin:0 0 8px}.booking-sent p{color:#74695f;line-height:1.7}
+
 /* =========================================================
    レスポンシブ（タブレット・PC）
    ========================================================= */
@@ -1108,6 +1144,9 @@ a {
   .section-title {
     font-size: 28px;
   }
+
+  .reservation-layout { grid-template-columns:minmax(0,1.65fr) minmax(260px,.75fr); }
+  .admin-demo { grid-template-columns:.85fr 1.25fr;align-items:center;padding:28px 32px; }
 }
 
 @media (min-width: 1024px) {
