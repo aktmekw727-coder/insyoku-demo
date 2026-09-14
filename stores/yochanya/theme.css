@@ -1,0 +1,38 @@
+/* =========================================================
+   集い処 よっちゃん家 専用テーマ
+   共通テンプレート（../shared/style.css）の配色変数だけを
+   上書きする、店舗専用の薄いレイヤーです。
+   ベース: 生成り / 明るい木目 / 深い赤茶（暖色）
+   ------------------------------------------------------------
+   佳鈴（stores/karin/）とは異なる、居酒屋らしい親しみやすい配色。
+   高級店・チェーン店のような雰囲気にはしない。
+   共通テンプレート本体（style.css / app.js）は変更しない。
+   ========================================================= */
+
+:root {
+  --paper: #fffaf2;
+  --paper-soft: #f8ecd8;
+  --cream-deep: #f2ddb4;
+  --wood-light: #f4dfba;
+  --ink: #3a2418;
+  --ink-soft: #6f5142;
+  --ink-faint: #a3877a;
+  --brown: #8a3220;
+  --brown-dark: #4a1d12;
+  --line: rgba(138, 50, 32, 0.18);
+}
+
+/* ヘッダー上部に暖色の帯を一本添えて、佳鈴とは異なる表情に */
+.site-header {
+  border-top: 3px solid var(--brown);
+}
+
+/* 「仮」価格バッジ表示：断定しないメニュー仮紹介であることが伝わるように */
+.course-price {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  background: var(--wood-light);
+  color: var(--brown-dark);
+  padding: 2px 9px;
+  border-radius: 999px;
+}
