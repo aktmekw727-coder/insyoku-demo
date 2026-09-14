@@ -1,0 +1,1030 @@
+/* =========================================================
+   店舗別営業デモ 共通テンプレート スタイル
+   ベース: 白 / 墨色(黒) / 落ち着いた藍色
+   小料理店・日本料理店向けの上品で読みやすいデザイン
+   （焼肉「陣力」デモとは配色・装飾を分けた別テーマ）
+   ========================================================= */
+
+:root {
+  --paper: #ffffff;
+  --paper-soft: #f4f5f6;
+  --ink: #23262b;
+  --ink-soft: #5c6067;
+  --ink-faint: #8a8e94;
+  --indigo: #29465f;
+  --indigo-dark: #1c3143;
+  --indigo-soft: #e8eef2;
+  --line: rgba(35, 38, 43, 0.14);
+  --white: #ffffff;
+
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-soft: 0 10px 26px rgba(28, 49, 67, 0.1);
+  --shadow-card: 0 4px 14px rgba(28, 49, 67, 0.08);
+  --container: 1080px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 84px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Hiragino Mincho ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.75;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  fill: none;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- 営業デモ表示バナー ---------- */
+
+.demo-banner {
+  background: var(--indigo-dark);
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  padding: 7px 14px;
+}
+
+/* ---------- 写真プレースホルダー（仮画像） ---------- */
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background:
+    repeating-linear-gradient(135deg, rgba(41, 70, 95, 0.07) 0 2px, transparent 2px 11px),
+    linear-gradient(155deg, var(--paper-soft), var(--indigo-soft) 140%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo::before {
+  content: attr(data-caption);
+  position: relative;
+  z-index: 0;
+  color: rgba(28, 49, 67, 0.55);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-align: center;
+  padding: 9px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+}
+
+.photo-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 0;
+  background: rgba(28, 49, 67, 0.82);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.photo--wide {
+  aspect-ratio: 4 / 3;
+}
+
+.photo--card {
+  aspect-ratio: 5 / 4;
+}
+
+/* ---------- ヘッダー ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+  text-decoration: none;
+}
+
+.brand-en {
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: var(--indigo);
+  font-weight: 700;
+}
+
+.brand-name {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+
+.nav-desktop {
+  display: none;
+  gap: 26px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-desktop a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-desktop a:hover {
+  color: var(--indigo);
+  border-bottom-color: var(--indigo);
+}
+
+.header-cta {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  background: var(--indigo);
+  color: var(--white);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  padding: 6px 20px 16px;
+  gap: 2px;
+  border-top: 1px solid var(--line);
+}
+
+.nav-mobile.open {
+  display: flex;
+}
+
+.nav-mobile a {
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-mobile a.header-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  color: var(--white);
+}
+
+/* ---------- ヒーロー ---------- */
+
+.hero {
+  position: relative;
+  color: var(--white);
+  overflow: hidden;
+  min-height: 82vw;
+  max-height: 520px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero .photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+
+.hero .photo::before {
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(28, 49, 67, 0.4);
+}
+
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(28, 49, 67, 0.2) 0%, rgba(23, 39, 53, 0.6) 65%, rgba(16, 27, 37, 0.86) 100%);
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  padding: 26px 20px 32px;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: #dfe8ee;
+  border: 1px solid rgba(223, 232, 238, 0.55);
+  border-radius: 999px;
+  padding: 5px 12px;
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.55;
+  margin: 0 0 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hero-lead {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0 0 20px;
+  max-width: 520px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--indigo);
+  color: var(--white);
+  box-shadow: 0 10px 22px rgba(28, 49, 67, 0.32);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ---------- セクション共通 ---------- */
+
+.section {
+  padding: 52px 0;
+}
+
+.section-soft {
+  background: var(--paper-soft);
+}
+
+.section-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 11.5px;
+  letter-spacing: 0.2em;
+  color: var(--indigo);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 22px;
+  margin: 0 0 8px;
+  color: var(--ink);
+  letter-spacing: 0.03em;
+}
+
+.section-lead {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* ---------- コースカード ---------- */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.course-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.course-card .photo {
+  border-radius: 0;
+}
+
+.course-body {
+  padding: 16px 18px 18px;
+}
+
+.course-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.course-name {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.course-price {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--indigo);
+  white-space: nowrap;
+}
+
+.course-desc {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* ---------- 店舗情報 ---------- */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.info-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.info-card .photo {
+  border-radius: 0;
+}
+
+.info-card-body {
+  padding: 18px;
+}
+
+.info-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.info-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.info-list .icon {
+  color: var(--indigo);
+  flex: none;
+  margin-top: 3px;
+}
+
+.info-note {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ---------- 来店経路の案内 ---------- */
+
+.channel-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 0 0 26px;
+}
+
+.channel-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.channel-chip .icon {
+  font-size: 14px;
+}
+
+/* ---------- 予約セクション ---------- */
+
+.section-reservation {
+  background: var(--indigo-dark);
+  color: #f5f7f8;
+}
+
+.reservation-head .section-title,
+.reservation-head .section-lead {
+  color: #f5f7f8;
+}
+
+.reservation-head .section-eyebrow {
+  color: #b9cbd8;
+}
+
+.reservation-layout {
+  display: grid;
+  gap: 18px;
+}
+
+.booking-panel,
+.booking-explain,
+.admin-demo {
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+}
+
+.booking-panel {
+  padding: 18px;
+  overflow: hidden;
+}
+
+.booking-panel-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.booking-kicker {
+  margin: 0 0 5px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--indigo);
+}
+
+.booking-note,
+.booking-help {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.request-badge {
+  white-space: nowrap;
+  border-radius: 999px;
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.booking-calendar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(92px, 1fr));
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.booking-day {
+  min-width: 92px;
+  display: grid;
+  gap: 7px;
+}
+
+.booking-date {
+  text-align: center;
+  padding: 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+.booking-date strong {
+  display: block;
+  font-size: 14px;
+}
+
+.booking-date span {
+  font-size: 11px;
+  color: var(--ink-faint);
+}
+
+.slot-btn {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 10px;
+  padding: 8px 5px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slot-btn b {
+  color: var(--indigo);
+  font-size: 16px;
+}
+
+.slot-btn:hover {
+  border-color: var(--indigo);
+  background: var(--indigo-soft);
+}
+
+.slot-btn.disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.booking-help {
+  margin-top: 8px;
+}
+
+.booking-explain {
+  padding: 22px;
+}
+
+.booking-explain-title {
+  margin: 0 0 16px;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.booking-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.booking-steps li {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.booking-steps li > span {
+  flex: 0 0 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--indigo);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+}
+
+.booking-steps strong,
+.booking-steps small {
+  display: block;
+}
+
+.booking-steps small {
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.confirm-note {
+  margin-top: 18px;
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.phone-link {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+/* ---------- 管理画面サンプル ---------- */
+
+.admin-demo {
+  margin-top: 22px;
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.admin-demo h3 {
+  margin: 5px 0 8px;
+  font-size: 18px;
+}
+
+.admin-demo p {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.admin-board {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.admin-row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr 0.9fr;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.admin-row-head {
+  border-top: 0;
+  background: var(--paper-soft);
+  color: var(--ink-soft);
+  font-weight: 800;
+}
+
+.status {
+  border-radius: 999px;
+  padding: 4px 8px;
+  text-align: center;
+  font-weight: 800;
+}
+
+.status-wait {
+  background: #f0e6c9;
+  color: #7a5b12;
+}
+
+.status-ok {
+  background: #dbe6df;
+  color: #285238;
+}
+
+/* ---------- 予約希望モーダル ---------- */
+
+.booking-modal[hidden] {
+  display: none;
+}
+
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 27, 34, 0.72);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.booking-modal-card {
+  position: relative;
+  width: min(100%, 440px);
+  max-height: 92vh;
+  overflow: auto;
+  background: var(--paper);
+  border-radius: 20px;
+  padding: 24px;
+  color: var(--ink);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+}
+
+.booking-close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  border: 0;
+  background: transparent;
+  font-size: 26px;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.booking-modal-card h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.selected-slot {
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+#booking-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+#booking-form label {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#booking-form input,
+#booking-form select,
+#booking-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px;
+  font: inherit;
+  background: #fff;
+}
+
+.form-caution {
+  margin: 0;
+  color: var(--indigo-dark);
+  background: var(--indigo-soft);
+  border-radius: 8px;
+  padding: 9px 11px;
+  font-size: 12px;
+  line-height: 1.6;
+  font-weight: 700;
+}
+
+.booking-sent {
+  text-align: center;
+  padding: 18px 0 0;
+}
+
+.sent-check {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: var(--indigo-soft);
+  color: var(--indigo-dark);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.booking-sent h3 {
+  margin: 0 0 8px;
+}
+
+.booking-sent p {
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+/* ---------- フッター ---------- */
+
+.footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.82);
+  padding: 32px 0 22px;
+}
+
+.footer-brand {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.footer-address {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.62);
+  margin-bottom: 6px;
+}
+
+.footer-note {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 20px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  padding-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.demo-badge {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.footer-disclaimer {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* =========================================================
+   レスポンシブ（タブレット・PC）
+   ========================================================= */
+
+@media (min-width: 640px) {
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .nav-desktop {
+    display: flex;
+  }
+
+  .header-cta {
+    display: inline-flex;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .hero {
+    min-height: 44vw;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-lead {
+    font-size: 15px;
+  }
+
+  .hero-content {
+    padding: 40px 48px 52px;
+    max-width: 620px;
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .section-title {
+    font-size: 27px;
+  }
+
+  .reservation-layout {
+    grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.8fr);
+  }
+
+  .admin-demo {
+    grid-template-columns: 0.85fr 1.25fr;
+    align-items: center;
+    padding: 28px 32px;
+  }
+}

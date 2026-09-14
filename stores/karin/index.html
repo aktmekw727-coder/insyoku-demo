@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旬彩 佳鈴 | 鹿児島県鹿児島市</title>
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+<!-- アイコン定義 (共通SVGスプライト) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="icon-pin" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/>
+      <circle cx="12" cy="9" r="2.4"/>
+    </symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <circle cx="12" cy="12" r="8.5"/>
+      <path d="M12 7.5V12l3.2 2"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2 2C10.5 20 4 13.5 4 5a2 2 0 0 1 2-2z"/>
+    </symbol>
+    <symbol id="icon-seat" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <circle cx="8.5" cy="8" r="3"/>
+      <circle cx="16" cy="9.5" r="2.4"/>
+      <path d="M3 20c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+      <path d="M14.5 20c0-2.2 1.6-4 4-4.3"/>
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M4 12.5l5 5L20 6.5"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ================= 営業提案用デモ 表示バナー ================= -->
+<div class="demo-banner">営業提案用デモです。実際の店舗とは関係ありません（掲載内容・価格・写真はすべてサンプルです）</div>
+
+<!-- ヘッダー -->
+<header class="site-header">
+  <div class="container">
+    <a href="#home" class="brand">
+      <span class="brand-en">SHUNSAI KARIN</span>
+      <span class="brand-name">旬彩 佳鈴</span>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#home">ホーム</a>
+      <a href="#course">コース</a>
+      <a href="#store">店舗情報</a>
+      <a href="#reservation">予約</a>
+    </nav>
+    <a class="header-cta" href="#reservation">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+      予約希望はこちら
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く">
+      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="nav-mobile">
+    <a href="#home">ホーム</a>
+    <a href="#course">コース</a>
+    <a href="#store">店舗情報</a>
+    <a href="#reservation">予約</a>
+    <a class="btn btn-primary header-cta" href="#reservation">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+      予約希望はこちら
+    </a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ================= ホーム / ヒーロー ================= -->
+  <section id="home">
+    <div class="hero">
+      <div class="photo" data-caption="旬彩 佳鈴 店内・料理イメージ">
+        <span class="photo-badge">仮画像</span>
+        <img src="assets/images/hero.jpg" alt="旬彩 佳鈴 店内・料理イメージ" onerror="this.remove()">
+      </div>
+      <div class="hero-scrim"></div>
+      <div class="hero-content">
+        <span class="hero-badge">鹿児島県鹿児島市</span>
+        <h1 class="hero-title">旬の魚と、おまかせの時間。</h1>
+        <p class="hero-lead">山之口町の小料理店で、その日仕入れた旬の魚を中心に、板前がその場でご用意するおまかせコースをお楽しみください。</p>
+        <div class="hero-actions">
+          <a href="#reservation" class="btn btn-primary">予約希望はこちら</a>
+          <a href="#course" class="btn btn-outline">コースを見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= コース紹介 ================= -->
+  <section id="course" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">COURSE</span>
+        <h2 class="section-title">おまかせコース</h2>
+        <p class="section-lead">旬彩 佳鈴は、旬の魚とおまかせコースを中心とした日本料理・小料理店です（価格は営業デモ用の参考表示です）</p>
+      </div>
+      <div class="course-grid" id="course-grid"></div>
+    </div>
+  </section>
+
+  <!-- ================= 店舗情報 ================= -->
+  <section id="store" class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">STORE</span>
+        <h2 class="section-title">店舗情報</h2>
+        <p class="section-lead">カウンター中心の落ち着いた空間で、板前との会話も楽しみながらお召し上がりいただけます</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div id="store-photo"></div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card-body">
+            <p class="info-card-title">店舗情報・アクセス</p>
+            <ul class="info-list" id="store-info-list"></ul>
+            <p class="info-note">住所・電話番号・営業時間はデモ表示用のサンプルです。最新情報は店舗へご確認ください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 予約希望受付 ================= -->
+  <section id="reservation" class="section section-reservation">
+    <div class="container reservation-wrap">
+      <div class="section-head reservation-head">
+        <span class="section-eyebrow">RESERVATION REQUEST</span>
+        <h2 class="section-title">空き状況を確認して、予約希望を送信</h2>
+        <p class="section-lead">Instagram・LINE・Google などからお越しの方も、こちらから予約希望を送信いただけます。</p>
+      </div>
+
+      <div class="channel-strip" id="channel-strip"></div>
+
+      <div class="reservation-layout">
+        <div class="booking-panel">
+          <div class="booking-panel-top">
+            <div>
+              <p class="booking-kicker">9月の予約状況</p>
+              <p class="booking-note">○ 受付可能　△ 残りわずか　－ 受付終了</p>
+            </div>
+            <span class="request-badge">仮受付制</span>
+          </div>
+          <div class="booking-calendar" id="booking-calendar"></div>
+          <p class="booking-help">現在は主に電話でのご予約を承っております。オンラインの予約希望も、お店が確認のうえご連絡いたします。</p>
+        </div>
+
+        <div class="booking-explain">
+          <p class="booking-explain-title">ご予約までの流れ</p>
+          <ol class="booking-steps">
+            <li><span>1</span><div><strong>日時を選ぶ</strong><small>カレンダーから希望日時を選択</small></div></li>
+            <li><span>2</span><div><strong>予約希望を送信</strong><small>人数・お名前・電話番号を入力</small></div></li>
+            <li><span>3</span><div><strong>お店が確認</strong><small>確認後、予約確定のお知らせ</small></div></li>
+          </ol>
+          <p class="confirm-note">この時点では予約確定ではありません。お店が内容を確認したうえで、予約確定となります。</p>
+          <a href="tel:0992266468" class="phone-link">
+            <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>電話で予約する
+          </a>
+        </div>
+      </div>
+
+      <div class="admin-demo">
+        <div class="admin-demo-copy">
+          <span class="section-eyebrow">STORE SCREEN</span>
+          <h3>お店側は、すべての予約をひとつの画面で確認</h3>
+          <p>Webの予約希望を承認し、電話・Instagram DMなどの予約も手動で追加できます。</p>
+        </div>
+        <div class="admin-board" id="admin-board"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="booking-modal" id="booking-modal" hidden>
+  <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+    <button class="booking-close" id="booking-close" aria-label="閉じる">×</button>
+    <p class="booking-kicker">予約希望</p>
+    <h2 id="booking-modal-title">希望内容を入力</h2>
+    <p class="selected-slot" id="selected-slot"></p>
+    <form id="booking-form">
+      <label>お名前<input required name="name" placeholder="例）鹿児島 花子"></label>
+      <label>人数<select required name="people"><option value="">選択してください</option><option>1名</option><option>2名</option><option>3名</option><option>4名</option><option>5名以上</option></select></label>
+      <label>電話番号<input required name="phone" inputmode="tel" placeholder="090-0000-0000"></label>
+      <label>ご要望（任意）<textarea name="note" rows="3" placeholder="苦手な食材、アレルギーなど"></textarea></label>
+      <p class="form-caution">この時点では予約確定ではありません。お店の確認後に予約確定となります。</p>
+      <button class="btn btn-primary btn-block" type="submit">予約希望を送信する</button>
+    </form>
+    <div class="booking-sent" id="booking-sent" hidden>
+      <div class="sent-check">✓</div>
+      <h3>予約希望を受け付けました</h3>
+      <p>お店が内容を確認後、予約確定のお知らせをお送りします。</p>
+      <button class="btn btn-dark btn-block" id="booking-done">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= フッター ================= -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer-brand">旬彩 佳鈴</p>
+    <p class="footer-address">鹿児島県鹿児島市山之口町9-38 宇都ビル1F</p>
+    <p class="footer-note">このサイトは営業提案用デモです。実際の店舗とは関係ありません。掲載内容・価格・写真はすべてサンプル（仮画像）です。</p>
+
+    <div class="footer-bottom">
+      <span class="demo-badge">DEMO</span>
+      <span class="footer-disclaimer">※営業提案用デモです。実際の店舗とは関係ありません。</span>
+    </div>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="../shared/app.js"></script>
+</body>
+</html>
