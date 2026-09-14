@@ -378,6 +378,50 @@ document.getElementById("coupon-get-btn").addEventListener("click", () => {
   document.getElementById("coupon-done").hidden = false;
 });
 
+/* ---------- 予約希望デモ ---------- */
+
+const BOOKING_DAYS = [
+  { date: "9/15", day: "火", slots: [["18:00", "○"], ["19:00", "△"], ["20:00", "○"]] },
+  { date: "9/16", day: "水", slots: [["18:00", "△"], ["19:00", "－"], ["20:00", "○"]] },
+  { date: "9/17", day: "木", slots: [["18:00", "○"], ["19:00", "○"], ["20:00", "△"]] },
+  { date: "9/18", day: "金", slots: [["18:00", "△"], ["19:00", "－"], ["20:00", "△"]] },
+  { date: "9/19", day: "土", slots: [["18:00", "○"], ["19:00", "△"], ["20:00", "－"]] },
+];
+
+const bookingCalendar = document.getElementById("booking-calendar");
+bookingCalendar.innerHTML = BOOKING_DAYS.map((day) => `
+  <div class="booking-day">
+    <div class="booking-date"><strong>${day.date}</strong><span>${day.day}</span></div>
+    ${day.slots.map(([time, state]) => `<button class="slot-btn ${state === "－" ? "disabled" : ""}" ${state === "－" ? "disabled" : ""} data-date="${day.date}（${day.day}）" data-time="${time}"><span>${time}</span><b>${state}</b></button>`).join("")}
+  </div>`).join("");
+
+const bookingModal = document.getElementById("booking-modal");
+const bookingForm = document.getElementById("booking-form");
+const bookingSent = document.getElementById("booking-sent");
+
+function closeBookingModal() {
+  bookingModal.hidden = true;
+  document.body.classList.remove("modal-open");
+  bookingForm.hidden = false;
+  bookingSent.hidden = true;
+  bookingForm.reset();
+}
+
+document.querySelectorAll(".slot-btn:not(.disabled)").forEach((button) => button.addEventListener("click", () => {
+  document.getElementById("selected-slot").textContent = `${button.dataset.date} ${button.dataset.time}`;
+  bookingModal.hidden = false;
+  document.body.classList.add("modal-open");
+}));
+
+document.getElementById("booking-close").addEventListener("click", closeBookingModal);
+document.getElementById("booking-done").addEventListener("click", closeBookingModal);
+bookingModal.addEventListener("click", (event) => { if (event.target === bookingModal) closeBookingModal(); });
+bookingForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  bookingForm.hidden = true;
+  bookingSent.hidden = false;
+});
+
 /* ---------- 口コミ（評価による誘導の出し分けはしない） ---------- */
 
 document.querySelectorAll("#star-select .star-btn").forEach((star) => {
