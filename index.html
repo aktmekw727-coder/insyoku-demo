@@ -84,9 +84,9 @@
       <a href="#recommend">おすすめ</a>
       <a href="#store">店舗情報</a>
     </nav>
-    <a class="header-cta" href="tel:0994000000">
-      <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>
-      ご予約はお電話で
+    <a class="header-cta" href="#reservation">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+      24時間 予約希望受付
     </a>
     <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く">
       <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -98,9 +98,9 @@
     <a href="#lunch">ランチ</a>
     <a href="#recommend">おすすめ</a>
     <a href="#store">店舗情報</a>
-    <a class="btn btn-primary header-cta" href="tel:0994000000">
-      <svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>
-      ご予約はお電話で
+    <a class="btn btn-primary header-cta" href="#reservation">
+      <svg class="icon" aria-hidden="true"><use href="#icon-check"></use></svg>
+      24時間 予約希望受付
     </a>
   </nav>
 </header>
@@ -224,6 +224,55 @@
     </div>
   </section>
 
+  <!-- ================= 予約希望受付 ================= -->
+  <section id="reservation" class="section section-reservation">
+    <div class="container reservation-wrap">
+      <div class="section-head reservation-head">
+        <span class="section-eyebrow">RESERVATION REQUEST</span>
+        <h2 class="section-title">24時間、予約希望を受け付けています</h2>
+        <p class="section-lead">空き状況を選んで送信してください。お店が確認・承認した後に予約確定となります。</p>
+      </div>
+
+      <div class="reservation-layout">
+        <div class="booking-panel">
+          <div class="booking-panel-top">
+            <div>
+              <p class="booking-kicker">9月の予約状況</p>
+              <p class="booking-note">○ 受付可能　△ 残りわずか　－ 受付終了</p>
+            </div>
+            <span class="request-badge">仮受付制</span>
+          </div>
+          <div class="booking-calendar" id="booking-calendar"></div>
+          <p class="booking-help">電話や他サイトから入った予約も、お店側の管理画面にまとめて反映する想定です。</p>
+        </div>
+
+        <div class="booking-explain">
+          <p class="booking-explain-title">ご予約までの流れ</p>
+          <ol class="booking-steps">
+            <li><span>1</span><div><strong>日時を選ぶ</strong><small>カレンダーから希望日時を選択</small></div></li>
+            <li><span>2</span><div><strong>予約希望を送信</strong><small>人数・連絡先を入力して仮受付</small></div></li>
+            <li><span>3</span><div><strong>お店が確認</strong><small>承認後に予約確定のお知らせ</small></div></li>
+          </ol>
+          <a href="tel:0994000000" class="phone-link"><svg class="icon" aria-hidden="true"><use href="#icon-phone"></use></svg>電話で予約する</a>
+        </div>
+      </div>
+
+      <div class="admin-demo">
+        <div class="admin-demo-copy">
+          <span class="section-eyebrow">STORE SCREEN</span>
+          <h3>お店側は、すべての予約をひとつの画面で確認</h3>
+          <p>Webの予約希望を承認し、電話・他サイトの予約も手動で追加できます。</p>
+        </div>
+        <div class="admin-board">
+          <div class="admin-row admin-row-head"><span>日時</span><span>予約経路</span><span>状態</span></div>
+          <div class="admin-row"><span>9/16 18:00</span><span>Web</span><span class="status status-wait">承認待ち</span></div>
+          <div class="admin-row"><span>9/16 19:30</span><span>電話</span><span class="status status-ok">確定</span></div>
+          <div class="admin-row"><span>9/17 18:30</span><span>他サイト</span><span class="status status-ok">確定</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= 店舗情報 ================= -->
   <section id="store" class="section section-paper">
     <div class="container">
@@ -313,6 +362,29 @@
   </section>
 
 </main>
+
+<div class="booking-modal" id="booking-modal" hidden>
+  <div class="booking-modal-card" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+    <button class="booking-close" id="booking-close" aria-label="閉じる">×</button>
+    <p class="booking-kicker">予約希望</p>
+    <h2 id="booking-modal-title">希望内容を入力</h2>
+    <p class="selected-slot" id="selected-slot"></p>
+    <form id="booking-form">
+      <label>お名前<input required name="name" placeholder="例）前川 輝人"></label>
+      <label>人数<select required name="people"><option value="">選択してください</option><option>1名</option><option>2名</option><option>3名</option><option>4名</option><option>5名以上</option></select></label>
+      <label>電話番号<input required name="phone" inputmode="tel" placeholder="090-0000-0000"></label>
+      <label>ご要望（任意）<textarea name="note" rows="3" placeholder="お子様連れ、コース希望など"></textarea></label>
+      <p class="form-caution">この時点では予約確定ではありません。お店の承認後に確定します。</p>
+      <button class="btn btn-primary btn-block" type="submit">予約希望を送信する</button>
+    </form>
+    <div class="booking-sent" id="booking-sent" hidden>
+      <div class="sent-check">✓</div>
+      <h3>予約希望を受け付けました</h3>
+      <p>お店が内容を確認後、予約確定のお知らせをお送りします。</p>
+      <button class="btn btn-dark btn-block" id="booking-done">閉じる</button>
+    </div>
+  </div>
+</div>
 
 <!-- ================= フッター ================= -->
 <footer class="footer">
