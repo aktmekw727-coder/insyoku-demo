@@ -1,27 +1,28 @@
 /* =========================================================
    店舗別営業デモ 共通テンプレート スタイル
-   ベース: 白 / 墨色(黒) / 落ち着いた藍色
-   小料理店・日本料理店向けの上品で読みやすいデザイン
+   ベース: 白・生成り / 明るい木目 / 焦げ茶（文字・アクセント）
+   小料理店・日本料理店向けの、親しみやすく読みやすいデザイン
    （焼肉「陣力」デモとは配色・装飾を分けた別テーマ）
    ========================================================= */
 
 :root {
-  --paper: #ffffff;
-  --paper-soft: #f4f5f6;
-  --ink: #23262b;
-  --ink-soft: #5c6067;
-  --ink-faint: #8a8e94;
-  --indigo: #29465f;
-  --indigo-dark: #1c3143;
-  --indigo-soft: #e8eef2;
-  --line: rgba(35, 38, 43, 0.14);
+  --paper: #fffdf8;
+  --paper-soft: #f6f0e4;
+  --cream-deep: #efe3cc;
+  --wood-light: #f1e2c8;
+  --ink: #3b2c22;
+  --ink-soft: #6b5b4d;
+  --ink-faint: #9c8b7c;
+  --brown: #5a3820;
+  --brown-dark: #3f2716;
+  --line: rgba(74, 51, 35, 0.16);
   --white: #ffffff;
 
   --radius-lg: 18px;
   --radius-md: 12px;
   --radius-sm: 8px;
-  --shadow-soft: 0 10px 26px rgba(28, 49, 67, 0.1);
-  --shadow-card: 0 4px 14px rgba(28, 49, 67, 0.08);
+  --shadow-soft: 0 10px 26px rgba(74, 51, 35, 0.1);
+  --shadow-card: 0 4px 14px rgba(74, 51, 35, 0.08);
   --container: 1080px;
 }
 
@@ -69,11 +70,11 @@ a {
   padding: 0 20px;
 }
 
-/* ---------- 営業デモ表示バナー ---------- */
+/* ---------- ご提案用サンプル 表示バナー ---------- */
 
 .demo-banner {
-  background: var(--indigo-dark);
-  color: rgba(255, 255, 255, 0.92);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   text-align: center;
   font-size: 11.5px;
   letter-spacing: 0.03em;
@@ -87,8 +88,8 @@ a {
   overflow: hidden;
   border-radius: var(--radius-md);
   background:
-    repeating-linear-gradient(135deg, rgba(41, 70, 95, 0.07) 0 2px, transparent 2px 11px),
-    linear-gradient(155deg, var(--paper-soft), var(--indigo-soft) 140%);
+    repeating-linear-gradient(135deg, rgba(90, 56, 32, 0.07) 0 2px, transparent 2px 11px),
+    linear-gradient(155deg, var(--paper-soft), var(--wood-light) 140%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,13 +99,13 @@ a {
   content: attr(data-caption);
   position: relative;
   z-index: 0;
-  color: rgba(28, 49, 67, 0.55);
+  color: rgba(63, 39, 22, 0.55);
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-align: center;
   padding: 9px 14px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 253, 248, 0.6);
   border-radius: 999px;
 }
 
@@ -113,7 +114,7 @@ a {
   top: 10px;
   left: 10px;
   z-index: 0;
-  background: rgba(28, 49, 67, 0.82);
+  background: rgba(63, 39, 22, 0.82);
   color: #fff;
   font-size: 10.5px;
   font-weight: 700;
@@ -145,7 +146,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 253, 248, 0.96);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
@@ -169,7 +170,7 @@ a {
 .brand-en {
   font-size: 10px;
   letter-spacing: 0.28em;
-  color: var(--indigo);
+  color: var(--brown);
   font-weight: 700;
 }
 
@@ -195,15 +196,15 @@ a {
 }
 
 .nav-desktop a:hover {
-  color: var(--indigo);
-  border-bottom-color: var(--indigo);
+  color: var(--brown);
+  border-bottom-color: var(--brown);
 }
 
 .header-cta {
   display: none;
   align-items: center;
   gap: 6px;
-  background: var(--indigo);
+  background: var(--brown);
   color: var(--white);
   border: none;
   border-radius: 999px;
@@ -273,14 +274,14 @@ a {
 }
 
 .hero .photo::before {
-  color: rgba(255, 255, 255, 0.78);
-  background: rgba(28, 49, 67, 0.4);
+  color: rgba(255, 253, 248, 0.78);
+  background: rgba(63, 39, 22, 0.4);
 }
 
 .hero-scrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(28, 49, 67, 0.2) 0%, rgba(23, 39, 53, 0.6) 65%, rgba(16, 27, 37, 0.86) 100%);
+  background: linear-gradient(180deg, rgba(58, 40, 26, 0.12) 0%, rgba(48, 32, 20, 0.48) 65%, rgba(35, 22, 12, 0.78) 100%);
   z-index: 2;
 }
 
@@ -296,8 +297,8 @@ a {
   font-size: 11px;
   letter-spacing: 0.22em;
   font-weight: 700;
-  color: #dfe8ee;
-  border: 1px solid rgba(223, 232, 238, 0.55);
+  color: #f6ecd9;
+  border: 1px solid rgba(246, 236, 217, 0.55);
   border-radius: 999px;
   padding: 5px 12px;
   margin-bottom: 14px;
@@ -313,7 +314,7 @@ a {
 
 .hero-lead {
   font-size: 13.5px;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(255, 253, 248, 0.9);
   margin: 0 0 20px;
   max-width: 520px;
 }
@@ -339,15 +340,15 @@ a {
 }
 
 .btn-primary {
-  background: var(--indigo);
+  background: var(--brown);
   color: var(--white);
-  box-shadow: 0 10px 22px rgba(28, 49, 67, 0.32);
+  box-shadow: 0 10px 22px rgba(63, 39, 22, 0.32);
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 253, 248, 0.12);
   color: var(--white);
-  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border: 1.5px solid rgba(255, 253, 248, 0.75);
 }
 
 .btn-dark {
@@ -379,7 +380,7 @@ a {
   display: inline-block;
   font-size: 11.5px;
   letter-spacing: 0.2em;
-  color: var(--indigo);
+  color: var(--brown);
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -437,7 +438,7 @@ a {
 .course-price {
   font-size: 17px;
   font-weight: 800;
-  color: var(--indigo);
+  color: var(--brown);
   white-space: nowrap;
 }
 
@@ -497,7 +498,7 @@ a {
 }
 
 .info-list .icon {
-  color: var(--indigo);
+  color: var(--brown);
   flex: none;
   margin-top: 3px;
 }
@@ -522,8 +523,8 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--indigo-soft);
-  color: var(--indigo-dark);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   border-radius: 999px;
   padding: 7px 14px;
   font-size: 12.5px;
@@ -537,17 +538,8 @@ a {
 /* ---------- 予約セクション ---------- */
 
 .section-reservation {
-  background: var(--indigo-dark);
-  color: #f5f7f8;
-}
-
-.reservation-head .section-title,
-.reservation-head .section-lead {
-  color: #f5f7f8;
-}
-
-.reservation-head .section-eyebrow {
-  color: #b9cbd8;
+  background: var(--cream-deep);
+  color: var(--ink);
 }
 
 .reservation-layout {
@@ -561,7 +553,7 @@ a {
   background: var(--paper);
   color: var(--ink);
   border-radius: var(--radius-lg);
-  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .booking-panel {
@@ -582,7 +574,7 @@ a {
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: var(--indigo);
+  color: var(--brown);
 }
 
 .booking-note,
@@ -596,8 +588,8 @@ a {
 .request-badge {
   white-space: nowrap;
   border-radius: 999px;
-  background: var(--indigo-soft);
-  color: var(--indigo-dark);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   padding: 6px 10px;
   font-size: 11px;
   font-weight: 800;
@@ -646,13 +638,13 @@ a {
 }
 
 .slot-btn b {
-  color: var(--indigo);
+  color: var(--brown);
   font-size: 16px;
 }
 
 .slot-btn:hover {
-  border-color: var(--indigo);
-  background: var(--indigo-soft);
+  border-color: var(--brown);
+  background: var(--wood-light);
 }
 
 .slot-btn.disabled {
@@ -692,7 +684,7 @@ a {
   flex: 0 0 30px;
   height: 30px;
   border-radius: 50%;
-  background: var(--indigo);
+  background: var(--brown);
   color: #fff;
   display: grid;
   place-items: center;
@@ -711,8 +703,8 @@ a {
 
 .confirm-note {
   margin-top: 18px;
-  background: var(--indigo-soft);
-  color: var(--indigo-dark);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   border-radius: var(--radius-md);
   padding: 12px 14px;
   font-size: 12.5px;
@@ -816,7 +808,7 @@ a {
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background: rgba(20, 27, 34, 0.72);
+  background: rgba(43, 30, 20, 0.72);
   display: grid;
   place-items: center;
   padding: 18px;
@@ -835,7 +827,7 @@ a {
   border-radius: 20px;
   padding: 24px;
   color: var(--ink);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
 }
 
 .booking-close {
@@ -855,8 +847,8 @@ a {
 }
 
 .selected-slot {
-  background: var(--indigo-soft);
-  color: var(--indigo-dark);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   border-radius: 10px;
   padding: 10px 12px;
   font-weight: 800;
@@ -890,8 +882,8 @@ a {
 
 .form-caution {
   margin: 0;
-  color: var(--indigo-dark);
-  background: var(--indigo-soft);
+  color: var(--brown-dark);
+  background: var(--wood-light);
   border-radius: 8px;
   padding: 9px 11px;
   font-size: 12px;
@@ -909,8 +901,8 @@ a {
   height: 56px;
   margin: 0 auto 12px;
   border-radius: 50%;
-  background: var(--indigo-soft);
-  color: var(--indigo-dark);
+  background: var(--wood-light);
+  color: var(--brown-dark);
   display: grid;
   place-items: center;
   font-size: 26px;
@@ -929,8 +921,8 @@ a {
 /* ---------- フッター ---------- */
 
 .footer {
-  background: var(--ink);
-  color: rgba(255, 255, 255, 0.82);
+  background: var(--brown-dark);
+  color: rgba(255, 253, 248, 0.82);
   padding: 32px 0 22px;
 }
 
@@ -943,18 +935,18 @@ a {
 
 .footer-address {
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 253, 248, 0.62);
   margin-bottom: 6px;
 }
 
 .footer-note {
   font-size: 11.5px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 253, 248, 0.55);
   margin-bottom: 20px;
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 253, 248, 0.16);
   padding-top: 16px;
   display: flex;
   flex-wrap: wrap;
@@ -967,15 +959,15 @@ a {
   display: inline-block;
   font-size: 10px;
   letter-spacing: 0.28em;
-  color: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 253, 248, 0.6);
+  border: 1px solid rgba(255, 253, 248, 0.3);
   border-radius: 999px;
   padding: 4px 12px;
 }
 
 .footer-disclaimer {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 253, 248, 0.55);
 }
 
 /* =========================================================
