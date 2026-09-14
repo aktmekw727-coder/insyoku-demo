@@ -74,7 +74,7 @@ function renderStoreInfo(config) {
   if (listEl) {
     listEl.innerHTML = `
       <li>${iconSvg("pin")}<span>${config.address}</span></li>
-      <li>${iconSvg("phone")}<a href="${config.phoneHref}">${config.phone}</a></li>
+      <li>${iconSvg("phone")}<span>${config.phone}</span></li>
       <li>${iconSvg("clock")}<span>${config.hoursNote}</span></li>
       <li>${iconSvg("seat")}<span>${config.seats}</span></li>
     `;
@@ -149,6 +149,18 @@ function closeBookingModal() {
   bookingForm.reset();
 }
 
+/* ---------- 電話予約ボタン（デモでは発信しない） ---------- */
+
+function initPhoneDemoButton() {
+  const btn = document.getElementById("phone-demo-btn");
+  const note = document.getElementById("phone-demo-note");
+  if (!btn || !note) return;
+
+  btn.addEventListener("click", () => {
+    note.hidden = false;
+  });
+}
+
 /* ---------- 管理画面サンプル ---------- */
 
 function renderAdminSample(config) {
@@ -180,6 +192,7 @@ function initStorePage(config) {
   renderStoreInfo(config);
   renderBookingCalendar(config);
   initBookingModal();
+  initPhoneDemoButton();
   renderAdminSample(config);
 }
 
