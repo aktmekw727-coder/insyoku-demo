@@ -36,3 +36,30 @@
   padding: 2px 9px;
   border-radius: 999px;
 }
+
+/* ---------- 写真の表示位置調整 ----------
+   object-fit:cover（共通CSS）はそのまま利用し、引き伸ばしはしない。
+   ここでは「どの位置を中心に切り出すか」だけを写真ごとに指定する。
+   ヒーロー写真は横長(16:9)で、スマホ幅では縦長の枠に入るため左右が
+   トリミングされる。看板・提灯・入口のある右寄りを中心に見せる。 */
+.hero .photo img {
+  object-position: 70% 45%;
+}
+
+/* 店内写真は枠(4:3)と写真の比率が一致しており、トリミングはほぼ発生しない */
+#store-photo .photo img {
+  object-position: 50% 50%;
+}
+
+/* お品書き（仮）3枚：料理の中心が切れないよう、写真ごとに位置を指定 */
+#course-grid .course-card:nth-child(1) .photo img {
+  object-position: 50% 55%;
+}
+
+#course-grid .course-card:nth-child(2) .photo img {
+  object-position: 50% 48%;
+}
+
+#course-grid .course-card:nth-child(3) .photo img {
+  object-position: 50% 52%;
+}
