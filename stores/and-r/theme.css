@@ -84,6 +84,32 @@
   color: var(--ink-soft);
 }
 
+/* ---------- ヒーロー余白調整 ----------
+   キャッチコピー（見出し）を削除してテキスト量が減った分、
+   共通CSSのヒーロー枠（写真の高さ）をそのままにすると上部の余白だけが
+   不自然に広くなるため、この店舗の枠だけ高さを少し詰める。
+   （枠を詰めすぎると、写真が無い間の「仮画像」キャプションが下寄せの
+   本文と重なるため、キャプション側は上寄せに変更して独立させる） */
+.hero {
+  min-height: 78vw;
+  max-height: 460px;
+}
+
+@media (min-width: 860px) {
+  .hero {
+    min-height: 38vw;
+  }
+}
+
+.hero .photo {
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hero .photo::before {
+  margin-top: 16px;
+}
+
 /* ---------- 写真の表示位置調整 ----------
    object-fit:cover（共通CSS）はそのまま利用し、引き伸ばしはしない。
    ここでは「どの位置を中心に切り出すか」だけを写真ごとに指定する。
