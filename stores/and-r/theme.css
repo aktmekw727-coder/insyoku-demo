@@ -1,0 +1,97 @@
+/* =========================================================
+   あんどあーる 専用テーマ
+   共通テンプレート（../shared/style.css）の配色変数だけを
+   上書きする、店舗専用の薄いレイヤーです。
+   ベース: 白・黒 + 上品なピンク（美容室らしく明るく華やかに）
+   ------------------------------------------------------------
+   佳鈴・よっちゃん家（木目・焦げ茶系）とは異なる配色。
+   安っぽいネオンピンクにはしない。
+   共通テンプレート本体（style.css / app.js）は変更しない。
+   ========================================================= */
+
+:root {
+  --paper: #ffffff;
+  --paper-soft: #fbf2f3;
+  --cream-deep: #f7e3e6;
+  --wood-light: #f6e2e6;
+  --ink: #1f1b1c;
+  --ink-soft: #5a5354;
+  --ink-faint: #948c8d;
+  --brown: #b8798c;
+  --brown-dark: #86485a;
+  --line: rgba(31, 27, 28, 0.12);
+}
+
+/* 予約CTA・見出し下線などのアクセントは黒で引き締める（白・黒・ピンクの3色構成） */
+.header-cta,
+.btn-primary {
+  background: var(--ink);
+}
+
+.slot-btn b {
+  color: var(--brown-dark);
+}
+
+/* ヘッダー：ロゴ下に「非公式のご提案デモ」であることを小さく表示 */
+.and-r-tag {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 9.5px;
+  letter-spacing: 0.05em;
+  color: var(--ink-faint);
+}
+
+/* 「料金はお問い合わせください」など、価格未確定メニューでも折り返して崩れないように */
+.course-price {
+  font-size: 12.5px;
+  white-space: normal;
+  text-align: right;
+  max-width: 46%;
+}
+
+#course-grid .course-name-row {
+  flex-wrap: wrap;
+}
+
+/* Instagramへ戻る導線（電話ボタンと同じ見た目を、店舗専用CSSの中だけで再現） */
+.instagram-link {
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 14px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.instagram-link:hover {
+  border-color: var(--brown);
+}
+
+.demo-note {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+
+/* ---------- 写真の表示位置調整 ----------
+   object-fit:cover（共通CSS）はそのまま利用し、引き伸ばしはしない。
+   ここでは「どの位置を中心に切り出すか」だけを写真ごとに指定する。
+   実写がまだ無いため、現時点ではプレースホルダーにのみ影響する。 */
+.hero .photo img {
+  object-position: 50% 40%;
+}
+
+#course-grid .course-card .photo img {
+  object-position: 50% 45%;
+}
