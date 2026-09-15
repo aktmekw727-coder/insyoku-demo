@@ -10,7 +10,6 @@ const STORE_CONFIG = {
   areaBadge: "ご提案用サンプル",
   genre: "ヘア・着付け・ネイルなど",
 
-  heroTitle: "なりたい私に、&R。",
   heroLead: "ヘア・着付け・メイク・ネイルまで。Instagramでご紹介しているメニューのご提案ページです。",
   heroImage: "hero",
 
